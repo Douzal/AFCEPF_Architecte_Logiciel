@@ -1,0 +1,13 @@
+
+ƒsquid:S2226"XRemove this misleading mutable servlet instance field or make it "static" and/or "final"(Ã¢¹ùÿÿÿÿH±RMAJORZBUG
+[squid:S1989$"&Add a "try/catch" block for "forward".(ãÄÑ•øÿÿÿÿH­RMINORZVULNERABILITY
+[squid:S1989$"&Add a "try/catch" block for "forward".(ãÄÑ•øÿÿÿÿH®RMINORZVULNERABILITY
+csquid:S1989""3Add a "try/catch" block for "setCharacterEncoding".(‰‡¸ÑH¬RMINORZVULNERABILITY
+[squid:S1989"&Add a "try/catch" block for "forward".(ãÄÑ•øÿÿÿÿH¨RMINORZVULNERABILITY
+hsquid:S1854"6Remove this useless assignment to local variable "sb".(Éò®ÔÿÿÿÿÿH²RMAJORZ
+CODE_SMELL
+[squid:S1989"&Add a "try/catch" block for "forward".(ãÄÑ•øÿÿÿÿH©RMINORZVULNERABILITY
+squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(´Óò“8¸¬êÆ¢,H³RMAJORZ
+CODE_SMELL
+„squid:CommentedOutCodeLine)"<This block of commented-out lines of code should be removed.(ö¯Şıÿÿÿÿ8¸¬êÆ¢,H´RMAJORZ
+CODE_SMELL

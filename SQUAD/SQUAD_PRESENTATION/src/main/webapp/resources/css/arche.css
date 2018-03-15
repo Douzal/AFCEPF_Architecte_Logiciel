@@ -1,0 +1,11 @@
+body {
+    font-family: 'Open Sans', Arial, sans-serif;
+    background-color: whitesmoke;
+}
+
+.avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+}
+

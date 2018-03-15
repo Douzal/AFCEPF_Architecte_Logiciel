@@ -1,0 +1,201 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Inscription/Connexion</ui:define>
+	<ui:define name="meta-data">
+
+		<f:metadata>
+			<f:event listener="#{mbSession.saveDernierUrl()}"
+				type="preRenderView"></f:event>
+		</f:metadata>
+
+	</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/carousel.css" position="last" />
+	</ui:define>
+	<ui:define name="js">
+		<h:outputScript name="js/index.js" position="last" />
+	</ui:define>
+	<ui:define name="content-visiteur">
+		<b:container layout="fluid" style="width: 100%; margin: 0px;">
+
+			<b:row>
+				<b:column col-md="4" offset-md="4">
+
+					<!-- *** DEBUT CAROUSEL INSCRIPTION / CONNEXION ***  -->
+
+					<b:panel style-class="content-wrapper" style="margin-top: 20px; ">
+						<b:row>
+					
+							<h:graphicImage value="/resources/images/Squad-blanc.png"
+								style="font-family: 'Roboto Slab', serif; font-size: 6em; color: white; font-weight: bold;" />
+							<b:carousel id="wizard" styleClass="wizardPseudoClass"
+								style="padding-top:10px;" startAnimation="false"
+								showIndicators="false" wrap="false" disabled="true">
+	
+								<!-- *** INSCRIPTION *** -->
+	
+								<b:carouselItem>
+									<b:panel
+										style="background-color: rgb(239, 208, 134,0); border: none;">
+	
+										<h:form id="fbconnect">
+											<!-- *** FACEBOOK *** -->
+	
+											<b:row>
+												<b:column col-md="12">
+													<b:commandButton value="S'inscrire avec Facebook"
+														action="#{mbSession.connexionAuth()}" look="info"
+														style="width:100%; border-radius: 50px; font-size: 1.2em;" />
+												</b:column>
+											</b:row>
+										</h:form>
+										<h:form id="subscribeForm">
+											<!-- *** FIN FACEBOOK *** -->
+	
+											<!-- SEPARATEUR -->
+											<b:row>
+												<b:column col-md="12">
+													<div class="separateur-y"></div>
+												</b:column>
+											</b:row>
+	
+											<!-- FIN SEPARATEUR -->
+	
+											<h4 class="entete-panel" style="color: white !important;">Rejoins
+												la communauté</h4>
+											<br />
+	
+											<b:row>
+												<b:column medium-screen="6">
+													<b:inputText required="true" placeholder="Nom" id="inputNom"
+														style-class="saisie-carousel"
+														value="#{mbInscription.nouveauMembre.nom}">
+													</b:inputText>
+												</b:column>
+												<b:column medium-screen="6">
+													<b:inputText required="true" placeholder="Prénom"
+														id="inputPrenom" style-class="saisie-carousel"
+														value="#{mbInscription.nouveauMembre.prenom}">
+													</b:inputText>
+												</b:column>
+											</b:row>
+											<b:row>
+												<b:column medium-screen="6">
+													<b:dateTimePicker required="true" allow-input-toggle="true"
+														use-current="false" show-icon="false" show-time="false"
+														placeholder="Date de Naissance" id="inputDob"
+														value="#{mbInscription.nouveauMembre.dateNaissance}">
+														<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+													</b:dateTimePicker>
+												</b:column>
+												<b:column medium-screen="6">
+													<b:panelGrid columns="2" required="true"
+														style-class="saisie-carousel">
+														<b:radiobutton value="#{mbInscription.nouveauMembre.sexe}"
+															itemLabel="Homme" itemValue="1" />
+														<b:radiobutton value="#{mbInscription.nouveauMembre.sexe}"
+															itemLabel="Femme" itemValue="2" />
+													</b:panelGrid>
+												</b:column>
+											</b:row>
+											<hr />
+											<b:row>
+												<b:column medium-screen="12">
+													<b:inputText required="true" placeholder="E-mail"
+														id="inputMail" value="#{mbInscription.nouveauMembre.email}">
+													</b:inputText>
+												</b:column>
+											</b:row>
+											<b:row>
+												<b:column medium-screen="12">
+													<b:inputSecret required="true" placeholder="Mot de passe"
+														id="inputPassword"
+														value="#{mbInscription.nouveauMembre.password}">
+													</b:inputSecret>
+												</b:column>
+											</b:row>
+											<b:row>
+												<b:column col-md="12">
+													<b:commandButton action="#{mbInscription.test()}"
+														value="Inscription" style-class="bouton-cool"
+														id="bouton-inscription" />
+												</b:column>
+											</b:row>
+										</h:form>
+									</b:panel>
+								</b:carouselItem>
+	
+								<!-- *** FIN INSCRIPTION *** -->
+	
+								<!-- *** CONNEXION MAIL *** -->
+	
+								<b:carouselItem>
+									<b:panel
+										style="background-color: rgb(239, 208, 134,0); border: none;">
+										<h:form id="loginForm">
+											<h4 class="entete-panel" style="color: white !important;">Déjà
+												inscrit ?</h4>
+											<br />
+											<b:row>
+												<b:column col-md="12">
+													<b:inputText placeholder="E-mail" id="inputMail"
+														value="#{mbSession.mail}">
+													</b:inputText>
+												</b:column>
+												<b:column col-md="12">
+													<b:inputSecret placeholder="Mot de passe" id="inputPassword"
+														value="#{mbSession.password}">
+													</b:inputSecret>
+												</b:column>
+												<b:column col-md="12">
+													<b:commandButton value="Connexion" style-class="bouton-cool"
+														id="bouton-connexion" action="#{mbSession.connexion()}" />
+													<hr />
+												</b:column>
+										
+											</b:row>
+										</h:form>
+									</b:panel>
+								</b:carouselItem>
+	
+								<!-- *** FIN CONNEXION MAIL *** -->
+	
+								<!-- *** BOUTONS NAVIGATION CAROUSEL *** -->
+								<b:panel style="border: none; background : transparent;">
+								<b:row>
+									<b:column col-md="5">
+										<b:carouselControl direction="right">
+											<b:button value="Nouveau membre" style="float: left;" styleClass="bouton-selection"
+											onclick="$('.wizardPseudoClass').carousel('prev');$('.wizardPseudoClass').carousel('pause');" />
+										</b:carouselControl>
+									</b:column>
+									<b:column col-md="5" offset-md="2">
+										<b:carouselControl direction="left">
+											<b:button value="Connexion" style="float: right; " styleClass="bouton-selection"
+												onclick="$('.wizardPseudoClass').carousel('next');$('.wizardPseudoClass').carousel('pause');" />
+										</b:carouselControl>
+									</b:column>
+								</b:row>
+								</b:panel>
+							</b:carousel>
+						</b:row>
+					</b:panel>
+				</b:column>
+				<b:column col-md="3" offset-md="9" style="margin-top: 600px;">
+					<h:outputLabel
+						value=" Le terrain de basket Duperré à Pigalle, Paris"
+						style="color: white; font-size: 1.5em;" />
+				</b:column>
+			</b:row>
+
+		</b:container>
+	</ui:define>
+</ui:composition>
+</html>

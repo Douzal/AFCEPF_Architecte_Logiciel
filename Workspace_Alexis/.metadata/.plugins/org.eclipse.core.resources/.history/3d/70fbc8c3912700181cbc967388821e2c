@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>-- Formulaire --</title>
+</head>
+<body>
+
+<form action="formulaire.html" method="post">
+	<p>
+	<label for="civ">Civilite : </label><input id="civ" name="civ" type="text" placeholder="h, f"></input>
+	<label for="nom">Nom : </label><input id="nom" name="nom" type="text" placeholder="nom"></input>
+	<label for="prenom">Prenom : </label><input id="prenom" name=""prenom"" type="text" placeholder="prenom"></input>
+	<label for="mdp">mot de passe : </label><input id="mdp" name=""mdp"" type="password" placeholder="mdp"></input>
+	<label for="dob">Date naissance : </label><input id="dob" name=""mdp"" type="date" placeholder="Naissance"></input>
+	<label>Activité : </label>
+	<label>Adresse : </label>
+<!-- 	<br /> -->
+	
+	<label>Que voulez-vous ? :</label>
+	<input type="checkbox" name="manger" id="manger"/><label for="manger">Manger</label>
+	<input type="checkbox" name="boire" checked="checked" id="boire"/><label for="boire">Manger</label>
+	<input type="checkbox" name="vivre" id="vivre" /><label for="vivre">Vivre tout simplement.</label>
+	<input type="checkbox" name="ecrire" /><label for="ecrire">Ecrire</label>
+	
+	<input type="submit" name="sendForm" value="Envoyer le formulaire" />
+	</p>
+</form>
+
+
+</body>
+</html>

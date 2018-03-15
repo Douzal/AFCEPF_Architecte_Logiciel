@@ -1,0 +1,7 @@
+
+isquid:S1197"8Move the array designator from the variable to the type.(Ê¡ÁòüÿÿÿÿHPRMINORZ
+CODE_SMELL
+™ squid:ForLoopCounterChangedCheckP"XRefactor the code in order to not assign to this loop counter from within the loop body.(²¤³¸HQRMAJORZ
+CODE_SMELL
+wsquid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(åèê™HRRMAJORZ
+CODE_SMELL

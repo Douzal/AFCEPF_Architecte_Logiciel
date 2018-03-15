@@ -1,0 +1,5 @@
+import javax.servlet.jsp.tagext.TagSupport;
+
+public class TagHelloWord extends TagSupport {
+
+}

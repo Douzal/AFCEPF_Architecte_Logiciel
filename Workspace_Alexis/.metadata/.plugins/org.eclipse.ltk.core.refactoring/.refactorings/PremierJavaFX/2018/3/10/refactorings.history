@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename local variable &apos;paramPrimaryStage&apos; in &apos;fr.afcepf.al31.presentation.GestionEvenements.start(...)&apos; to &apos;primaryStage&apos;&#x0D;&#x0A;- Original project: &apos;PremierJavaFX&apos;&#x0D;&#x0A;- Original element: &apos;fr.afcepf.al31.presentation.GestionEvenements.start(Stage).paramPrimaryStage&apos;&#x0D;&#x0A;- Renamed element: &apos;paramPrimaryStage&apos;&#x0D;&#x0A;- Update references to refactored element" description="Rename local variable &apos;paramPrimaryStage&apos;" id="org.eclipse.jdt.ui.rename.local.variable" input="/src\/main\/java&lt;fr.afcepf.al31.presentation{GestionEvenements.java[GestionEvenements~start~QStage;@paramPrimaryStage!375!397!381!397!QStage;!0!true" name="primaryStage" references="true" stamp="1520501258076" version="1.0"/>
+</session>

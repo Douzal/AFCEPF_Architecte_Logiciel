@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Premier JavaScript - AI102 - RIA</title>
+</head>
+<body>
+<h1>Hello JavaScript World !!!</h1>
+<script type="text/javascript">
+var unBoolean = false;
+console.log(unBoolean + ", " + typeof unBoolean);
+var unEntier = 5;
+console.log(unEntier + ", " + typeof unEntier);
+var unDecimal = 5.25;
+console.log(unDecimal + ", " + typeof unDecimal);
+var unAutreDecimal = "5.25";
+console.log(unAutreDecimal + ", " + typeof unAutreDecimal);
+console.log(unDecimal + unAutreDecimal);
+console.log(unDecimal == unAutreDecimal);
+console.log(unDecimal === unAutreDecimal);
+var uneDate = new Date();
+console.log(uneDate + ", " + typeof uneDate);
+console.log(uneDate.getMonth()); // 1 : mois : 0-11 
+console.log(uneDate.getDay()); // 1 : 0-6 dimache = 0
+console.log(uneDate.getDate()); // 5 : jours : 1-31
+console.log(uneDate.getYear()); // 118 : a partir de 1900
+console.log(uneDate.getFullYear()); // 2018
+var uneAutreDate = new Date("2018-02-05"); // yyyy-mm-dd
+console.log(uneAutreDate);
+// fonctions utiles : Math
+console.log(Math.random());
+console.log(Math.round(5.7)); // 6
+console.log(Math.round(5.4)); // 5
+console.log(Math.ceil(5.4)); // up 
+console.log(Math.floor(5.7)); // down 
+console.log(Math.min(12, 86.52, 456, 1, 5656, 12, -89, 153, 0.2));
+console.log(Math.max(12, 86.52, 456, 1, 5656, 12, -89, 153, 0.2));
+
+// Arrays
+var unTableau = new Array("coucou", 5, true, new Date());
+var unAutreTableau = ["coucou", 5, true, new Date()];
+console.log(unTableau);
+console.log(unTableau.length);
+console.log(unTableau[0]);
+console.log(unTableau[4]); // undefined (null en Java)
+console.log(unTableau.shift()); // retire le premier (fifo)
+console.log(unTableau);
+console.log(unTableau.pop()); // retire le dernier (lifo)
+console.log(unTableau);
+unTableau.push("test", 45450, false);
+console.log(unTableau);
+unTableau.splice(2, 1); // splice(indice, nb);
+console.log(unTableau);
+var texte = "5-125-coucou-test-false";
+var tab = texte.split("-");
+console.log(tab);
+var texte2 = tab.join(",");
+console.log(texte2);
+
+// Boucles
+for(let i = 0 ; i < tab.length ; i++) {
+	console.log(tab[i]);
+}
+var j = 0;
+for(;;) {
+	console.log(tab[j++]);
+	if (j === tab.length) {
+		break;
+	}
+}
+j = 0;
+while(j < tab.length) {
+	console.log(tab[j++]);
+}
+// coucou("test");
+// Exceptions
+try {
+	coucou("test");
+} catch (e) {
+	console.log(e);
+}
+var test = "azert";
+try {
+	var test2 = Number(test);
+	if(isNaN(test)) {
+		throw "x n'est pas un nombre";
+	}
+} catch (e) {
+	console.log(e);
+}
+console.log("suite du traitement");
+
+</script>
+</body>
+</html>

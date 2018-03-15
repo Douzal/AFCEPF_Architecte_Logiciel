@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#first.xhtml" PATH="/first.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#first.xhtml:0" NAME="item"
+   PATH="/first.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="toto:#{mbPremier.click()}:#toto.xhtml"
+    NAME="output" PATH="/toto.xhtml" TARGET="rules:#toto.xhtml"
+    TITLE="#{mbPremier.click()}:toto" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tata:#{mbPremier.click()}:#tata.xhtml"
+    NAME="output1" PATH="/tata.xhtml" TARGET="rules:#tata.xhtml"
+    TITLE="#{mbPremier.click()}:tata" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#toto.xhtml" PATH="/toto.xhtml"
+  SHAPE="240,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#tata.xhtml" PATH="/tata.xhtml"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#commande.xhtml" PATH="/commande.xhtml"
+  SHAPE="240,289,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#connexion.xhtml" PATH="/connexion.xhtml"
+  SHAPE="32,273,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#connexion.xhtml:0" NAME="item"
+   PATH="/connexion.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID=":#{mbConnexion.connexion()}:#commande.xhtml"
+    NAME="output" PATH="/commande.xhtml" TARGET="rules:#commande.xhtml"
+    TITLE="#{mbConnexion.connexion()}:[any]" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

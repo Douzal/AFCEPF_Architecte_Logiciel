@@ -1,0 +1,29 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h:form id="formulaire">
+		<label>Nom: </label><h:inputText value="#{mbAjouter.pers.nom}"/>
+		<br/>
+		<label>Prénom: </label><h:inputText value="#{mbAjouter.pers.prenom}" />
+		<br/>
+		<label>Password: </label><h:inputText id="mdp" value="#{mbAjouter.pers.mdp}" required="true">
+			<f:validateLength maximum="10" minimum="5"/>
+		</h:inputText>
+		<h:message for="mdp"/>
+		<br/>
+		<label>Email</label><h:inputText value="#{mbAjouter.pers.mail}" />
+		<br/>
+		<label>Date de Naissance</label>
+		<h:inputText value="#{mbAjouter.pers.dob}" id="date">
+			<f:convertDateTime pattern="dd/MM/yyyy"/>
+		</h:inputText>
+		<h:message for="date"/>
+		<h:commandButton action="#{mbAjouter.valider()}" value="Ajouter" /><h:outputLabel value="#{mbAjouter.message}" />
+	</h:form>
+</body> 
+</html>

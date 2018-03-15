@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputScript library="js" name="script-gmap-select-terrain.js" />
+
+	<style>
+#map {
+	width: 100%;
+	height: 398px;
+}
+
+.controls {
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 300px;
+}
+
+#pac-input:focus {
+	border-color: #4d90fe;
+}
+
+.pac-container {
+	font-family: Roboto;
+}
+</style>
+</h:head>
+<h:body>
+	<br />
+	<b:container fluid="true">
+		<b:row>
+			<b:column col-md="10" offset-md="1">
+				<b:form horizontal="true">
+					<b:column col-md="5" contentDisabled="false">
+						<b:well col-md="12">
+							<b:inputText required="true" placeholder="Titre" col-md="12">
+							</b:inputText>
+
+							<b:inputTextarea rows="4" placeholder="Description" col-md="12">
+							</b:inputTextarea>
+
+							<b:formGroup style="margin-bottom:0px;">
+								<b:dateTimePicker col-md="6" show-icon="false"
+									allow-input-toggle="true" placeholder="date/heure début">
+
+								</b:dateTimePicker>
+
+								<b:dateTimePicker col-md="6" show-icon="false"
+									allow-input-toggle="true" placeholder="date/heure fin">
+
+								</b:dateTimePicker>
+							</b:formGroup>
+						</b:well>
+						<br />
+						<b:well col-md="12" collapsible="false" style="color:gray;">
+						<br />
+							<b:formGroup>
+								<b:inputText required="false"
+									placeholder="Nombre max participants" col-md="6">
+								</b:inputText>
+
+								<b:selectOneMenu value="#{selectOneMenuBean.brand}" colMd="6"
+									required="false">
+									<f:selectItem itemLabel="Mixte" itemValue="0" />
+									<f:selectItem itemLabel="Homme" itemValue="1" />
+									<f:selectItem itemLabel="Femme" itemValue="2" />
+								</b:selectOneMenu>
+							</b:formGroup>
+							<center>
+								<b:selectBooleanCheckbox value="true" col-md="12"
+									caption=": l'organisateur(vous) est également participant" />
+							</center>
+						</b:well>
+
+					</b:column>
+					<b:column col-md="7">
+						<b:well col-md="12">
+							<div id="mapContainer">
+								<input id="pac-input" class="controls" type="text"
+									placeholder="Indiquer une ville" />
+								<div id="map"></div>
+							</div>
+						</b:well>
+					</b:column>
+					<b:column col-md="12">
+						<b:commandButton col-md="4" offset-md="4" look="primary"
+							value="Poster la rencontre" />
+					</b:column>
+				</b:form>
+
+			</b:column>
+		</b:row>
+	</b:container>
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places&amp;callback=initAutocomplete"
+		async="async" defer="defer"></script>
+</h:body>
+</html>

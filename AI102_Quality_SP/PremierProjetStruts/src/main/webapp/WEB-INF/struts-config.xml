@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+    "http://struts.apache.org/dtds/struts-config_1_3.dtd">
+<struts-config>
+	<form-beans>
+<!-- 	Ici les FormBean -->
+		<form-bean name="fbPremier" type="fr.afcepf.ai102.controller.formbean.PremierForm"></form-bean>
+		<form-bean name="fbAjouter" type="fr.afcepf.ai102.controller.formbean.AjouterForm"></form-bean>
+	
+	</form-beans>
+	<action-mappings>
+<!-- 	Ici les Actions -->
+		<action path="/nimportequoi" type="fr.afcepf.ai102.controller.action.PremiereAction"
+				name="fbPremier" scope="session">
+			<forward name="cequonveut" path="/premiere-page.jsp" />
+		</action>
+		<action path="/ajouter" type="fr.afcepf.ai102.controller.action.AjouterAction"
+				name="fbAjouter" scope="session">
+			<forward name="success" path="/ajouter-personne.jsp" />
+		</action>
+	</action-mappings>
+</struts-config>

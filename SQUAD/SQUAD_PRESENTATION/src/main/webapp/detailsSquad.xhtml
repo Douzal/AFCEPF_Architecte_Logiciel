@@ -1,0 +1,332 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Groupe : #{mbSquad.squad.nom}</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/detailsSquad.css" position="last" />
+	</ui:define>
+	<ui:define name="content-membre">
+		
+
+			<b:container>
+				<!-- 	descriptif du Squad -->
+				<b:row>
+					<b:column col-md="6">
+						<b:panel col-md="12" style=" border: 0;">
+							<b:image styleClass="photoSquad" value="#{mbSquad.squad.photo}"></b:image>
+						</b:panel>
+					</b:column>
+					<b:column col-md="6" style=" height: 100%;">
+						<b:panel col-md="12" style=" border: 0; padding-left: 20px;">
+							<b:row>
+								<h:outputLabel id="nomSquad" value="#{mbSquad.squad.nom}" />
+							</b:row>
+							<b:row>
+								<p class="labelGris">Lieu</p>
+								<h:outputLabel value="#{mbSquad.squad.squadRogueLeader.ville}" />
+							</b:row>
+							<b:row>
+								<p class="labelGris">Membres</p>
+								<h:outputLabel value="#{mbSquad.squad.membresSquad.size()}" />
+							</b:row>
+							<b:row>
+								<b:column col-md="1" style="padding: 0;">
+									<h:graphicImage
+										value="#{mbSquad.prochaineRencontre.organisateur.photo}"
+										styleClass="orga"></h:graphicImage>
+								</b:column>
+								<b:column col-md="6">
+									<p class="labelGris">Animateur du Groupe Squad</p>
+									<h:outputLabel
+										value="#{mbSquad.squad.squadRogueLeader.prenomNomTronque}" />
+								</b:column>
+							</b:row>
+					
+							<b:row style="margin-top:50px;" rendered="#{mbSquad.estMembreSquad == false}">
+	
+								<h:form id="ajoutMembre">
+									<b:column col-md="6">
+	
+										<h:commandButton
+											styleClass="bouton-valider" style="	padding: 12px 14px;"
+											value="Demander à rejoindre le groupe" action ="#{mbSquad.AjouterMembreSquad()}"/>
+	
+									</b:column>
+								</h:form>
+							</b:row>
+						
+						</b:panel>
+
+					</b:column>
+				</b:row>
+<!-- 				Panel prochain evenement 		 --> 
+				<b:row>
+				
+					<b:panel col-md="12" style=" border: 0;">
+						<b:row>
+							<h:outputLabel id="labelEvent" value="Prochain Evenement" />
+						</b:row>
+						<c:set var="prochaine" value="#{mbSquad.prochaineRencontre}"></c:set>
+						<c:if test="${prochaine != null}">
+						
+							<b:row>
+								<b:panel style-class="date-recap" style="height: 160px; background-color: #{mbSquad.prochaineRencontre.sport.couleur}" col-md="1" col-lg="1">
+												<h:outputLabel value="#{mbSquad.prochaineRencontre.dateDebut}">
+													<f:convertDateTime locale="fr" type="date" dateStyle="medium" pattern="d MMM" />
+												</h:outputLabel>
+												<h:graphicImage value="#{mbSquad.prochaineRencontre.sport.icone}" style="width: 30px; height: 30px;"/>
+								</b:panel>
+								<b:column col-md="6">
+									<b:row>
+										<h:outputLabel class="labelGris"
+											value="#{mbSquad.prochaineRencontre.dateDebut}">
+
+											<f:convertDateTime locale="fr" timeStyle="short" type="both"
+												dateStyle="full"   timeZone="CET"/>
+										</h:outputLabel>
+									</b:row>
+									<b:row>
+										<h:outputLabel value="#{mbSquad.prochaineRencontre.libelle}" />
+									</b:row>
+									<b:row>
+										<b:column col-md="1">
+											<h:graphicImage
+												value="#{mbSquad.prochaineRencontre.organisateur.photo}"
+												styleClass="orga"></h:graphicImage>
+										</b:column>
+										<b:column col-md="6">
+											<p class="labelGris">Organisateur</p>
+											<h:outputLabel
+												value="#{mbSquad.prochaineRencontre.organisateur.prenomNomTronque}" />
+										</b:column>
+									</b:row>
+									<b:row>
+										<h:outputLabel styleClass="desc"
+											value="#{mbSquad.prochaineRencontre.description}" />
+									</b:row>
+								</b:column>
+								<b:panel col-md="4" style="background-color:whitesmoke">
+									<b:row>
+										<b:column col-md="2">
+											<b:iconAwesome name="map-marker-alt" size="2x"></b:iconAwesome>
+										</b:column>
+										<b:column col-md="6">
+											<b:row>
+												#{mbSquad.prochaineRencontre.adresse}
+											</b:row>
+											<b:row>
+												<b>#{mbSquad.prochaineRencontre.codePostal} #{mbSquad.prochaineRencontre.ville}</b>
+											</b:row>
+											
+										</b:column>
+									</b:row>
+									
+								</b:panel>
+							</b:row>
+						</c:if>
+						<c:if test="${prochaine == null}">
+							<b:panel>
+
+								<b:column col-md="8" offset="4">
+
+									<h:outputLabel value="Pas d'évenements prévus" />
+
+								</b:column>
+
+
+							</b:panel>
+
+						</c:if>
+					
+					
+						<h:form id="formRedirect">
+							<b:row>
+							<b:column col-md="1" offset="5">
+							<b:navCommandLink value="More" action="#{mbSquad.redirectRencontre()}" />
+							</b:column>
+							</b:row>
+							</h:form>
+					</b:panel>
+					
+				</b:row>
+				<!--               panel A propos de ce groupe et messages  -->
+				<b:row>
+				  <b:tabView>
+				
+                 <b:tab title="Prochains Evenements">
+              		<b:column col-md="10" offset="1">
+							
+									<ui:repeat var="nextMeet" value="#{mbSquad.autreRencontres}">
+										<b:row>
+										<h:form id="rencontre">
+											<b:panel col-md="8" offset="2" style="border-radius: 20px">
+											<b:panel style-class="date-recap" style="height: 120px; background-color: #{nextMeet.sport.couleur}" col-md="2" col-lg="2">
+												<h:outputLabel value="#{nextMeet.dateDebut}">
+													<f:convertDateTime locale="fr" type="date" dateStyle="medium" pattern="d MMM" />
+												</h:outputLabel>
+												<h:graphicImage value="#{nextMeet.sport.icone}" style="width: 30px; height: 30px;"/>
+												</b:panel>
+												<b:column col-md="6">
+													<b:row>
+														<h:outputLabel class="labelGris"
+															value="#{nextMeet.dateDebut}">
+
+															<f:convertDateTime locale="fr" timeStyle="short"
+																type="both" dateStyle="full" />
+														</h:outputLabel>
+													</b:row>
+													<b:row>
+														<h:outputLabel value="#{nextMeet.libelle}" />
+													</b:row>
+													<b:row>
+														<b:column col-md="2">
+															<h:graphicImage value="#{nextMeet.organisateur.photo}"
+																styleClass="orga"></h:graphicImage>
+														</b:column>
+														<b:column col-md="6">
+															<p class="labelGris">Organisateur</p>
+														 <b:navLink value="#{nextMeet.organisateur.prenomNomTronque}" href="profile.xhtml?idmembre=#{nextMeet.organisateur.id}"></b:navLink>
+														</b:column>
+													</b:row>
+												</b:column>			
+											</b:panel>
+											</h:form>
+										</b:row>
+									</ui:repeat>
+							</b:column>
+							</b:tab>
+							<b:tab title="Evenements passes">
+              					<b:column col-md="10" offset="1">	
+									<ui:repeat var="oldMeet" value="#{mbSquad.rencontresPasse}">
+										<b:row>
+											<b:panel col-md="8" offset="2" style="border-radius: 20px">
+											<b:panel style-class="date-recap" style="height: 120px; background-color: #{oldMeet.sport.couleur}" col-md="2" col-lg="2">
+												<h:outputLabel value="#{oldMeet.dateDebut}">
+													<f:convertDateTime locale="fr" type="date" dateStyle="medium" pattern="d MMM" />
+												</h:outputLabel>
+												<h:graphicImage value="#{oldMeet.sport.icone}" style="width: 30px; height: 30px;"/>
+												</b:panel>
+												<b:column col-md="6">
+													<b:row>
+														<h:outputLabel class="labelGris"
+															value="#{oldMeet.dateDebut}">
+
+															<f:convertDateTime locale="fr" timeStyle="short"
+																type="both" dateStyle="full" />
+														</h:outputLabel>
+													</b:row>
+													<b:row>
+														<h:outputLabel value="#{oldMeet.libelle}" />
+													</b:row>
+													<b:row>
+														<b:column col-md="2">
+															<h:graphicImage value="#{oldMeet.organisateur.photo}"
+																styleClass="orga"></h:graphicImage>
+														</b:column>
+														<b:column col-md="6">
+															<p class="labelGris">Organisateur</p>
+														 <b:navLink value="#{oldMeet.organisateur.prenomNomTronque}" href="profile.xhtml?idmembre=#{oldMeet.organisateur.id}"></b:navLink>
+														</b:column>
+													</b:row>
+												</b:column>
+											</b:panel>
+										</b:row>
+									</ui:repeat>
+								
+
+							</b:column>
+							</b:tab>
+						        
+                 
+                 
+                 <b:tab title ="Membres">
+                 		<b:column col-md="6">
+							<ui:repeat var="memb" value="#{mbSquad.membreSquad}">
+								<b:column col-md="4" style="text-align:center; border-radius: 10px;">
+									<b:thumbnail class="memb">
+										<h:graphicImage value="#{memb.photo}" styleClass="member"></h:graphicImage>
+										<f:facet name="caption">
+											 <b:navLink value="#{memb.prenomNomTronque}" href="profile.xhtml?idmembre=#{memb.id}"></b:navLink>
+											 <br/>
+											<h:outputText value="Membre" class="labelGris" />
+										</f:facet>
+									</b:thumbnail>
+								</b:column>
+							</ui:repeat>
+						</b:column>
+                 </b:tab>
+                 <b:tab title="Conversation">
+					<b:panel col-md="12" style="background:whitesmoke;">
+						<b:row>
+						<h:form id="messagerie">
+							<b:column col-md="8">	
+								<b:row>
+								<c:set var="messageSquad"
+									value="#{mbSquad.squadMessage.messages}"></c:set>
+								<c:if test="${ messageSquad != null}">
+									<ui:repeat var="m" value="#{mbSquad.squadMessage.messages}">
+										<b:row>
+											<b:panel col-md="10" style="border-radius: 10px">
+												<b:row>
+													<b:column col-md="1">
+														<h:graphicImage value="#{m.auteur.photo}"
+															styleClass="orga"></h:graphicImage>
+													</b:column>
+													<b:column col-md="6">
+														 	<b:navLink value="#{m.auteur.prenomNomTronque}" href="profile.xhtml?idmembre=#{m.auteur.id}"></b:navLink>
+													</b:column>
+													<b:column col-md="4" >
+														<h:outputText styleClass="labelGris" value="#{m.dateMessage}">
+															<f:convertDateTime locale="fr" timeStyle="short" type="both"
+																dateStyle="full"   timeZone="CET"/>
+														</h:outputText>
+													</b:column>
+													<b:column col-md="1" rendered="#{mbMembre.membreConnecte.id == m.auteur.id}">
+														<b:iconAwesome name="times"/>
+													</b:column>
+												</b:row>
+												<b:row>
+													<b:column col-md="8" offset="1">
+														<h:outputText value="#{m.message}" />
+													</b:column>
+													
+												</b:row>
+											</b:panel>
+										</b:row>
+									</ui:repeat>
+								</c:if>
+								</b:row>
+								
+                               	<b:row>
+                               	<b:column col-md="8">
+							    <b:inputText placeholder="Envoyer" col-md="9" value="#{mbSquad.contenuMessage}"></b:inputText>
+									<b:commandButton value="Envoyer" col-md="3" style-class="bouton-valider"
+												action="#{mbSquad.ajouterMessage()}" update="@form" ></b:commandButton>
+								</b:column>	
+									</b:row>		
+							
+	
+							</b:column>
+							</h:form>
+						 				
+						</b:row>
+				
+
+
+					</b:panel>
+                     </b:tab>
+                     </b:tabView>
+                     </b:row>
+			</b:container>
+		
+		
+	</ui:define>
+</ui:composition>
+</html>

@@ -1,0 +1,20 @@
+
+isquid:S2583L"DChange this condition so that it does not always evaluate to "false"(«ìÕ×HERMAJORZBUG
+qsquid:S1854$"ERemove this useless assignment to local variable "unAutreCharactere".(²¢ÀÌHFRMAJORZ
+CODE_SMELL
+bsquid:S1481$"6Remove this unused "unAutreCharactere" local variable.(²¢ÀÌHGRMINORZ
+CODE_SMELL
+nsquid:S2583H"DChange this condition so that it does not always evaluate to "false"(žžÕÃýÿÿÿÿHHRMAJORZBUG
+Fsquid:S2178E"Correct this "|" to "||".(Âð¼aHIRBLOCKERZ
+CODE_SMELL
+|squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¹äòïþÿÿÿÿHJRMAJORZ
+CODE_SMELL
+Lsquid:S2178H"Correct this "&" to "&&".(žžÕÃýÿÿÿÿHKRBLOCKERZ
+CODE_SMELL
+vsquid:S1192V"GDefine a constant instead of duplicating this literal "coucou" 5 times.(ÓÝ“ÌHLRCRITICALZ
+CODE_SMELL
+_squid:S21231":Remove this increment or correct the code not to waste it.(Å‡Æ¬HMRMAJORZBUG
+asquid:S18541"5Remove this useless assignment to local variable "e".(Å‡Æ¬HNRMAJORZ
+CODE_SMELL
+Gsquid:S2178C"Correct this "&" to "&&".(Ì•µÚHORBLOCKERZ
+CODE_SMELL

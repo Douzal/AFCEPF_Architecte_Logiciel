@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+<f:metadata>
+	<f:event listener="#{mbCnx.securePage('Conseiller')}"
+			 type="preRenderView"></f:event>
+</f:metadata>
+	<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="contenu">Page Conseiller
+		<h:form>
+			<span>nom : </span>
+			<h:inputText value="#{mbConseil.nom}" >
+				<f:ajax event="keyup" listener="#{mbConseil.rechercherParticuliers()}"
+						execute="@this" render="toto"></f:ajax>
+			</h:inputText>
+			<h:commandButton action="#{mbConseil.rechercherParticuliers()}" 
+							 value="rechercher" />
+			<h:panelGroup layout="block" id="toto">
+			<ul>
+			<ui:repeat var="pers" value="${mbConseil.liste}">
+				<li>${pers.id}</li>
+				<li>${pers.mail}</li>
+				<li>${pers.nom}</li>
+				<li>${pers.dob}</li>
+			</ui:repeat>
+			</ul>
+			</h:panelGroup>
+		</h:form>
+		
+	</ui:define>
+	</ui:composition>
+</html>

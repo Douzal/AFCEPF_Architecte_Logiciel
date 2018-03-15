@@ -1,0 +1,17 @@
+
+lsquid:S1197"8Move the array designator from the variable to the type.(»…İÿ8÷‘ØŸ,HíRMINORZ
+CODE_SMELL
+€squid:S1192"IDefine a constant instead of duplicating this literal "Xopoulos" 3 times.(å¬ª™8¨Ôø×Ÿ,HîRCRITICALZ
+CODE_SMELL
+}squid:S1192"FDefine a constant instead of duplicating this literal "Dimou" 3 times.(å¬ª™8¨Ôø×Ÿ,HïRCRITICALZ
+CODE_SMELL
+jsquid:S1854"6Remove this useless assignment to local variable "s6".(ã–…8ÿ›ÍØŸ,HğRMAJORZ
+CODE_SMELL
+ssquid:S1161":Add the "@Override" annotation above this method signature(çä”˜ÿÿÿÿÿ8ÿ›ÍØŸ,HñRMAJORZ
+CODE_SMELL
+^squid:S00108&")Either remove or fill this block of code.(Ô»ø¹8¦´©ØŸ,HòRMAJORZ
+CODE_SMELL
+[squid:S1481"'Remove this unused "s6" local variable.(ã–…8ÿ›ÍØŸ,HóRMINORZ
+CODE_SMELL
+squid:CommentedOutCodeLine!"<This block of commented-out lines of code should be removed.(”Õ8¦´©ØŸ,HôRMAJORZ
+CODE_SMELL

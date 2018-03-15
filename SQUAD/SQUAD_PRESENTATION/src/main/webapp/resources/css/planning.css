@@ -1,0 +1,28 @@
+.resultat-recherche {
+	height: 480px !important;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+.fc-center h2 {
+	font-size: 1em;
+}
+
+.adresse {
+	color: #3299FF !important;
+	text-decoration: underline;
+}
+
+.adresse:hover {
+	color: white !important;
+	background-color: #3299FF !important;
+}
+
+.label-date {
+	color: dimgrey;
+	text-transform:capitalize;
+}
+
+#map {
+	height: 400px !important;
+}

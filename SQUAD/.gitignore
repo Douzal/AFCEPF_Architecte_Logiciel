@@ -1,0 +1,8 @@
+target/
+.settings/
+.metadata/
+.classpath
+.project
+.tern-project
+src/test/resources/crebase.bat
+

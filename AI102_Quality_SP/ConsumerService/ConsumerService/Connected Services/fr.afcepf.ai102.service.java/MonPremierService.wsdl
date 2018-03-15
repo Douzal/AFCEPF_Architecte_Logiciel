@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://monservice.ai102.afcepf.fr" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="MonPremierService" targetNamespace="http://monservice.ai102.afcepf.fr" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema elementFormDefault="unqualified" targetNamespace="http://monservice.ai102.afcepf.fr" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="Toto" type="tns:foo" />
+      <xs:element name="ajouter" type="tns:ajouter" />
+      <xs:element name="ajouterResponse" type="tns:ajouterResponse" />
+      <xs:element name="getToto" type="tns:getToto" />
+      <xs:element name="getTotoResponse" type="tns:getTotoResponse" />
+      <xs:element name="puissance" type="tns:puissance" />
+      <xs:element name="puissanceResponse" type="tns:puissanceResponse" />
+      <xs:complexType name="ajouter">
+        <xs:sequence>
+          <xs:element name="unEntier" type="xs:int" />
+          <xs:element name="unAutreEntier" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ajouterResponse">
+        <xs:sequence>
+          <xs:element name="resultatAddition" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="getToto">
+        <xs:sequence />
+      </xs:complexType>
+      <xs:complexType name="getTotoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="leToto" type="tns:foo" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="foo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="nom" type="xs:string" />
+          <xs:element minOccurs="0" name="prenom" type="xs:string" />
+        </xs:sequence>
+        <xs:attribute name="identifiant" type="xs:int" />
+      </xs:complexType>
+      <xs:complexType name="puissance">
+        <xs:sequence>
+          <xs:element name="unDouble" type="xs:double" />
+          <xs:element name="unAutreDouble" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="puissanceResponse">
+        <xs:sequence>
+          <xs:element name="resultatPuissance" type="xs:double" />
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="getToto">
+    <wsdl:part name="parameters" element="tns:getToto" />
+  </wsdl:message>
+  <wsdl:message name="ajouterResponse">
+    <wsdl:part name="parameters" element="tns:ajouterResponse" />
+  </wsdl:message>
+  <wsdl:message name="getTotoResponse">
+    <wsdl:part name="parameters" element="tns:getTotoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ajouter">
+    <wsdl:part name="parameters" element="tns:ajouter" />
+  </wsdl:message>
+  <wsdl:message name="puissanceResponse">
+    <wsdl:part name="parameters" element="tns:puissanceResponse" />
+  </wsdl:message>
+  <wsdl:message name="puissance">
+    <wsdl:part name="parameters" element="tns:puissance" />
+  </wsdl:message>
+  <wsdl:portType name="ICalcul">
+    <wsdl:operation name="ajouter">
+      <wsdl:input name="ajouter" message="tns:ajouter" />
+      <wsdl:output name="ajouterResponse" message="tns:ajouterResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getToto">
+      <wsdl:input name="getToto" message="tns:getToto" />
+      <wsdl:output name="getTotoResponse" message="tns:getTotoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="puissance">
+      <wsdl:input name="puissance" message="tns:puissance" />
+      <wsdl:output name="puissanceResponse" message="tns:puissanceResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="MonPremierServiceSoapBinding" type="tns:ICalcul">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ajouter">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="ajouter">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="ajouterResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getToto">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="getToto">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="getTotoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="puissance">
+      <soap:operation soapAction="" style="document" />
+      <wsdl:input name="puissance">
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output name="puissanceResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="MonPremierService">
+    <wsdl:port name="IMonInterfaceDeService" binding="tns:MonPremierServiceSoapBinding">
+      <soap:address location="http://localhost:18080/PremierService_JAXWS/MonPremierService/CalculSW" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

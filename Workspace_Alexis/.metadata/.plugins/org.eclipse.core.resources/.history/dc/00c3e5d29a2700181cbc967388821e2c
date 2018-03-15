@@ -1,0 +1,22 @@
+package fr.afcepf.al31.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/une-servlet.al31")
+public class UneServletpourFiltres extends HttpServlet {
+
+    private static final long serialVersionUID = 1L;
+    @Override
+    public void doGet(HttpServletRequest paramReq, HttpServletResponse paramResp)
+            throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        super.doGet(paramReq, paramResp);
+    }
+
+}

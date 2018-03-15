@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 janv. 2018 11:11:15 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="fr.afcepf.ai102.hibernate.entity.Ville" table="ville">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="libelle" type="java.lang.String">
+            <column name="libelle" length="50"/>
+        </property>
+        <set name="adresses" cascade="save-update">
+            <key>
+                <column name="id_ville" />
+            </key>
+            <one-to-many class="fr.afcepf.ai102.hibernate.entity.Adresse" />
+        </set>
+    </class>
+</hibernate-mapping>

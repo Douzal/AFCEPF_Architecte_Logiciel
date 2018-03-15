@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">									 <!-- ()() -->
+<title>JavaScript - AI102 - Recuperation Elements DOM</title><!-- (^^) Love HTML!-->
+<script type="text/javascript">								 <!--°(_()() -->
+function maFonction() {
+	//  par ID,    par form,  forms[x],  forms[nom], class,    tag
+	var methode1 = methode2 = methode3 = methode4 = methode5 = methode6 = "";
+	// par id:
+	methode1 = document.getElementById("id-saisie").value;
+	// par formulaire:
+	methode2 = document.monForm.txtSaisie.value;			//   ()()
+	methode3 = document.forms[0].txtSaisie.value;			//   (^^) And JavaScript !!!
+	methode4 = document.forms["monForm"].txtSaisie.value;   //	°(_()()
+	// par className
+	let collectionClasse = document.getElementsByClassName("class-saisie");
+	for (let i = 0 ; i < collectionClasse.length ; i++) {
+		if (collectionClasse[i].type === "text") {
+			methode5 = collectionClasse[i].value;
+		}
+	}
+	// par tagName
+	let collectionTag = document.getElementsByTagName("input");
+	for (let i = 0 ; i < collectionTag.length ; i++) {
+		if (collectionTag[i].id === "id-saisie") {
+			methode6 = collectionTag[i].value;
+		}
+	}
+	console.log("methode 1 : " + methode1);
+	console.log("methode 2 : " + methode2);
+	console.log("methode 3 : " + methode3);
+	console.log("methode 4 : " + methode4);
+	console.log("methode 5 : " + methode5);
+	console.log("methode 6 : " + methode6);
+	return false;
+}
+</script>
+</head>
+<body>
+	<form name="monForm" onsubmit="return maFonction()">
+		<span>saisie : </span>
+		<input type="text" id="id-saisie" class="class-saisie" name="txtSaisie" />
+		<input type="submit" value="Click JS!!!" />
+	</form>
+</body>
+</html>

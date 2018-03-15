@@ -1,0 +1,27 @@
+
+x
+squid:S8994"BDo something with the "boolean" value returned by "createNewFile".(³…ò§8Ðâ¥ýŸ,H©RMINORZVULNERABILITY
+‘squid:UselessImportCheck"KRemove this unused import 'java.lang.reflect.UndeclaredThrowableException'.(°µ¢Äÿÿÿÿÿ8˜ïäüŸ,HåRMINORZ
+CODE_SMELL
+vsquid:UselessImportCheck"0Remove this unused import 'java.io.IOException'.(ªº»Úýÿÿÿÿ8†ÚÛüŸ,HÛRMINORZ
+CODE_SMELL
+usquid:S1075"ARefactor your code to get this URI from a customizable parameter.(þþÄÇ8ÙŽÖüŸ,HÕRMINORZ
+CODE_SMELL
+zsquid:S1075$"ARefactor your code to get this URI from a customizable parameter.(Á«áÕüÿÿÿÿ8˜ïäüŸ,HäRMINORZ
+CODE_SMELL
+usquid:S1075"ARefactor your code to get this URI from a customizable parameter.(’°¨›8¶ºëüŸ,HéRMINORZ
+CODE_SMELL
+squid:CommentedOutCodeLine"<This block of commented-out lines of code should be removed.(¢ìª‰8ÙŽÖüŸ,HÐRMAJORZ
+CODE_SMELL
+}
+squid:S899"BDo something with the "boolean" value returned by "createNewFile".(¹«Ü±ùÿÿÿÿ8¥«ÚüŸ,HØRMINORZVULNERABILITY
+usquid:S1075*"ARefactor your code to get this URI from a customizable parameter.(÷¨¯Ê8‹õ˜ýŸ,H‹RMINORZ
+CODE_SMELL
+s
+squid:S899,"=Do something with the "boolean" value returned by "renameTo".(èŠ›å8Í½„ýŸ,HýRMINORZVULNERABILITY
+x
+squid:S899'"BDo something with the "boolean" value returned by "createNewFile".(ïŽ„¦8„ŸýüŸ,HŠRMINORZVULNERABILITY
+‚squid:S4042"IUse "java.nio.Files#delete" here for better messages on error conditions.(«¾‹Öûÿÿÿÿ8ËéÞüŸ,HàRMAJORZ
+CODE_SMELL
+v
+squid:S899";Do something with the "boolean" value returned by "delete".(«¾‹Öûÿÿÿÿ8ËéÞüŸ,HáRMINORZVULNERABILITY

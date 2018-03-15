@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<h:outputStylesheet name="CSS/masterStyle.css"/>
+<!-- 	Emplacement pour le titre des pages filles de la masterPage -->
+	<title><ui:insert name="title"></ui:insert></title>
+<!-- 	Emplacement pour les feuilles de style des pages filles de la masterPage -->
+	<ui:insert name="css"></ui:insert>
+</h:head> 
+<h:body> 
+	<div id="header">
+		<h1>AI102 Application</h1>
+	</div>
+	<div id="centre">
+<!-- 	Emplacement pour le contenu principal de mes pages -->
+		<ui:insert name="content"></ui:insert>
+	</div>
+	<div id="footer">
+		<h1>Footer</h1>
+	</div>
+<!-- 	Emplacement pour les scripts des pages filles de la masterPage -->
+	<ui:insert name="script"></ui:insert>
+</h:body> 
+</html>

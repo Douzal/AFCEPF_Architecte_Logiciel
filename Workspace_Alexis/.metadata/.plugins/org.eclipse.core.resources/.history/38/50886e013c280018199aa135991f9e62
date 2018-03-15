@@ -1,0 +1,14 @@
+<? xml version="1.0" encoding="UTF-8"?>
+<taglib xmlns="http://java.sun.con/xml/ns/javaee"
+		version="2.1"
+		xmlsn:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://java.sun.con/xml/ns/javaee"
+		http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd>
+		<tlib-version>1.0</tlib-version>
+		<short-name>al31</short-name>
+		<uri>http://taglib.al31.afcepf.fr/tags</uri>
+		<tag>
+			<name>hello</name>
+			<tag-class>fr.afcepf.al31.tag.TagHelloWorld</tag-class>
+			<body-content>empty</body-content>
+		</tag>

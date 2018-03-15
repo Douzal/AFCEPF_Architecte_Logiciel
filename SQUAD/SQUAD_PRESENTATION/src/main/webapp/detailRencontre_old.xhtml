@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Rendez-vous : #{mbDetailRencontre.rencontre.libelle}</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/detailRencontre.css" position="last" />
+		<h:outputStylesheet name="css/detailsSquad.css" position="last" />
+		<h:outputStylesheet name="css/gmap.css" position="last" />
+	</ui:define>
+	<ui:define name="js">
+		<h:outputScript name="js/gmap-recap-rencontre.js" position="last" />
+	</ui:define>
+	<ui:define name="content-membre">
+		<b:container fluid="true">
+
+			<!-- begin of Big Panel -->
+
+			<b:panel col-lg="10" offset="1">
+				<b:row>
+					<b:column span="8" offset="2">
+						<h2><span>Rendez-vous</span>#{mbDetailRencontre.rencontre.libelle}</h2>
+					</b:column>
+				</b:row>
+			<b:row>
+			<b:column col-lg="8">
+			  <b:row>
+			  
+	              <b:panel col-lg="12">
+	             
+					<!-- begin of Informations Panel -->
+	               <b:panel span="2" style="text-align:center">
+										<h:outputLabel class="labelRouge"	value="#{mbDetailRencontre.rencontre.dateDebut}">
+											<f:convertDateTime locale="fr" type="date" dateStyle="medium"
+												pattern="d MMM"  timeZone="CET" />
+										</h:outputLabel>
+									</b:panel>
+									<b:column col-md="7">
+										<b:row>
+											<h:outputLabel class="labelGris" value="#{mbDetailRencontre.rencontre.dateDebut}">
+	
+												<f:convertDateTime locale="fr" timeStyle="short" type="both"
+													dateStyle="full"   timeZone="CET"/>
+											</h:outputLabel>
+										</b:row>
+										<b:row>
+											<h:outputLabel value="#{mbDetailRencontre.rencontre.libelle}" />
+										</b:row>
+										<b:row>
+											<b:column col-md="2">
+												<h:graphicImage
+													value="#{mbDetailRencontre.rencontre.organisateur.photo}"
+													styleClass="orga"></h:graphicImage>
+											</b:column>
+											<b:column col-md="6">
+												<p class="labelGris">Organisateur</p>
+												<h:outputLabel
+													value="#{mbDetailRencontre.rencontre.organisateur.prenomNomTronque}" />
+											</b:column>
+										</b:row>
+										<b:row>
+											<h:outputLabel styleClass="desc"
+												value="#{mbDetailRencontre.rencontre.description}" />
+										</b:row>
+									</b:column>
+										<b:row>
+							<b:column col-md="3">
+							<h:form id="rejoindre">
+							<c:set var="idMembreConnecte"
+									value="#{mbDetailRencontre.membreConnected.id}" />
+								<c:if test="${mbDetailRencontre.estParticipant == false and (idMembreConnecte != idOrganisateur)}">
+								<b:commandButton value="Participer"
+									action="#{mbDetailRencontre.inscriptionRencontre()}"></b:commandButton>
+							</c:if>
+							<c:if test="${mbDetailRencontre.estParticipant}">
+									<b:commandButton value="" styleClass="bouton">Se désinscrire</b:commandButton>
+							</c:if>
+							</h:form>
+							</b:column>
+							</b:row>
+					</b:panel>
+				  </b:row>					<!--                  begin of membre Panel -->
+                 <b:row>
+                 <b:tabView>
+                 <b:tab title="Participants">
+                 <b:panel col-lg="12">
+							<ui:repeat var="memb" value="#{mbDetailRencontre.rencontre.participations}">
+								<b:column col-md="4" style="text-align:center">
+									<b:thumbnail class="memb">
+										<h:graphicImage value="#{memb.participant.photo}" styleClass="member"></h:graphicImage>
+										<f:facet name="caption">
+											 <b:navLink value="#{memb.participant.prenomNomTronque}" href="profile.xhtml?idmembre=#{memb.participant.id}"></b:navLink>
+											 <br/>
+											<h:outputText value="Participant" class="labelGris" />
+										</f:facet>
+									</b:thumbnail>
+								</b:column>
+							</ui:repeat>
+						</b:panel>
+				 </b:tab>
+				 <b:tab title="Conversation">
+				 <h:form id="messagerie">
+				 <c:set var="messageRencontre"
+									value="#{mbDetailRencontre.rencontreMessage.messages}"></c:set>
+				 <c:if test="${messageRencontre != null}">
+				
+				 <ui:repeat var="m" value="#{mbDetailRencontre.rencontreMessage.messages}">
+										<b:row>
+											<b:panel col-md="12">
+												<b:row>
+													<b:column col-md="1">
+														<h:graphicImage value="#{m.auteur.photo}"
+															styleClass="orga"></h:graphicImage>
+
+													</b:column>
+													<b:column col-md="4">
+														<b:row>
+															<b:column col-md="5">
+															 <b:navLink value="#{m.auteur.prenomNomTronque}" href="profile.xhtml?idmembre=#{m.auteur.id}"></b:navLink>
+															</b:column>
+															<b:column col-md="3">
+																<h:outputLabel styleClass="labelGris"
+																	value="#{m.dateMessage}">
+																	<f:convertDateTime locale="fr" type="date"
+																		dateStyle="medium" pattern="d MMM" timeZone="CET" />
+																</h:outputLabel>
+															</b:column>
+														</b:row>
+													</b:column>
+												</b:row>
+												<b:row>
+													<b:column col-md="8" offset="1">
+														<h:outputText value="#{m.message}" />
+													</b:column>
+													<b:column col-md="2">
+														<h:outputLabel styleClass="labelGris"
+																	value="#{m.dateMessage}">
+													<f:convertDateTime locale="fr" timeStyle="short"  timeZone="CET" type="time"/>
+													</h:outputLabel>
+													</b:column>
+												</b:row>
+											</b:panel>
+										</b:row>
+									</ui:repeat>
+			
+				 </c:if>
+				 <c:if test="${ messageRencontre == null}">
+									<b:panel col-md="10" style="height:200px">
+										<b:column col-md="4" offset="4">
+											<h:outputLabel value="Pas de conversations" />
+										</b:column>
+									</b:panel>
+								</c:if>
+				 	<b:panel>
+						
+							<b:inputText placeholder=""
+								value="#{mbDetailRencontre.reponse}"></b:inputText>
+							<b:commandButton value="envoyer"
+								action="#{mbDetailRencontre.ajouterMessage()}" update="@form"></b:commandButton>
+						
+					</b:panel>
+					</h:form>
+				 </b:tab>
+				 <c:if test="${mbDetailRencontre.squad!=null}">
+				 <b:tab title="Groupe">
+				 		<h:form>
+			
+				
+								
+									<b:thumbnail style="border:none;text-align:center">
+										<h:graphicImage value="#{mbDetailRencontre.squad.photo}" styleClass="photoSquadMini"></h:graphicImage>
+										<f:facet name="caption">
+											<h:outputLabel  value="#{mbDetailRencontre.squad.nom}"/>
+											<br/>
+											<h:graphicImage value="#{mbDetailRencontre.squad.squadRogueLeader.photo}" styleClass="avatar"></h:graphicImage> <h:outputLabel value="#{mbDetailRencontre.squad.squadRogueLeader.prenomNomTronque}" />
+											<b:navLink  href="detailsSquad.xhtml?idsquad=#{mbDetailRencontre.squad.id}" value="Details"></b:navLink>
+										</f:facet>
+									</b:thumbnail>
+								
+			
+			
+			</h:form>
+				 
+				 </b:tab>
+				 
+				 
+				 </c:if>
+				 
+				 </b:tabView>
+                 </b:row>
+                 </b:column>
+              
+<!--        end of membre Panel           -->
+									<!-- begin of Lieu Panel -->
+	
+					<b:column col-lg="4">
+						<b:row>
+							<b:panel>
+								<b:row>
+									<b:column span="1">
+										<b:iconAwesome name="fa-clock" />
+									</b:column>
+									<b:column span="8">
+										<h:outputText value="#{mbDetailRencontre.rencontre.dateDebut}">
+											<f:convertDateTime locale="fr" timeStyle="short" type="both"
+												dateStyle="full" timeZone="CET" />
+										</h:outputText>
+									</b:column>
+								</b:row>
+								<br />
+								<b:row>
+									<b:column span="1">
+										<b:iconAwesome name="fa-map-marker-alt" />
+									</b:column>
+	
+									<b:column span="8">
+										<h:outputText
+											value="#{mbDetailRencontre.rencontre.adresseComplete}" />
+									</b:column>
+								</b:row>
+								
+							</b:panel>
+						</b:row>
+	
+						<b:row>
+	
+							<div id="map"></div>
+							<h:form id="formMap">
+								<h:inputHidden value="#{mbDetailRencontre.infosRencontre}"
+									id="infosRencontre" />
+							</h:form>
+						</b:row>
+					</b:column>
+ 				</b:row>
+				<!-- end of Lieu Panel -->
+				
+	
+					
+					<!-- end of Informations Panel -->
+
+			</b:panel>
+
+			<!-- end of Big Panel -->
+
+		</b:container>
+		<!-- Load Facebook SDK for JavaScript -->
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places&amp;callback=initAutocomplete"
+			async="async" defer="defer"></script>
+	</ui:define>
+</ui:composition>
+
+
+</html>
+

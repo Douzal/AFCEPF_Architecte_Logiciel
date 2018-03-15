@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+<f:metadata>
+	<f:event listener="#{mbCnx.disparition()}" type="preRenderView"></f:event>
+</f:metadata>
+<h:head>
+	<title>
+		Ma Banque - <ui:insert name="title"></ui:insert>
+	</title>
+	<style type="text/css">
+		#page{
+			width:800px;
+			height: 600px;
+/* 			overflow: scroll; */
+		}
+		#header{
+			width:800px;
+			height: 100px;
+			text-align: right;
+			background-color: #ccc;
+		}
+		#menus {
+			width:200px;
+			height: 600px;
+			border-right: 1px solid gray;
+			float:left;
+			text-align: right;
+			background-color: #ddd;
+		}
+		ul{
+			margin: 0;
+			padding: 0;
+			list-style: none;
+			text-align: left;
+		}
+		#contenu {
+			width: 490px;
+			height: 300px;
+			float:left;
+		}
+	</style>
+</h:head> 
+<body> 
+	<div id="page">
+		<div id="header">
+			<h1>Ma Banque AI102</h1>
+			<h:panelGroup layout="block" rendered="#{mbCnx.connected == null}">
+			<h:form>
+				<span>mail : </span>
+				<h:inputText value="#{mbCnx.mail}" />
+				<span>mot de passe : </span>
+				<h:inputText value="#{mbCnx.pwd}" />
+				<h:commandButton action="#{mbCnx.connect()}" value="Se connecter" />
+				<span><strong>#{mbCnx.message}</strong></span>
+			</h:form>
+			</h:panelGroup>
+			<h:panelGroup layout="block" rendered="#{mbCnx.connected != null}">
+			<h:form>
+				<span>Bienvenue : #{mbCnx.connected.nom}</span>
+				<h:commandButton action="#{mbCnx.deconnection()}" value="Se deconnecter" />
+			</h:form>
+			</h:panelGroup>
+		</div>
+		<div id="menus">
+			<ul>
+				<li><a href="index.xhtml">Accueil</a></li>
+				<h:panelGroup layout="block" rendered="#{mbCnx.connected == null}">
+					<li><a href="inscription.xhtml">Inscription</a></li>
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{mbCnx.connected != null and mbCnx.connected.class.simpleName =='Particulier'}">
+					<li><a href="particulier.xhtml">Historique comptes particulier</a></li>
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{mbCnx.connected != null and mbCnx.connected.class.simpleName =='Societe'}">
+					<li><a href="societe.xhtml">Historique comptes societe</a></li>
+				</h:panelGroup>
+				<h:panelGroup layout="block" rendered="#{mbCnx.connected != null and mbCnx.connected.class.simpleName =='Conseiller'}">
+					<li><a href="conseiller.xhtml">rechercher societe</a></li>
+				</h:panelGroup>
+			</ul>
+		</div>
+		<div id="contenu">
+			<ui:insert name="contenu"></ui:insert>
+		</div>
+	</div>
+</body> 
+</html>

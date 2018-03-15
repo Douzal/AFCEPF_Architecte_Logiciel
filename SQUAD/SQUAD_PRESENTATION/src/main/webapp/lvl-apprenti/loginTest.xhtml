@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+
+	<title>Test login</title>
+
+	<f:metadata>
+		<f:event listener="#{mbSession.saveDernierUrl()}" type="preRenderView"></f:event>
+	</f:metadata>
+</h:head>
+<h:body>
+
+	<b:container layout="fluid">
+		<br />
+		<b:column medium-screen="6">
+			<b:panel title="Inscription" look="primary" collapsible="false">
+				<h:form id="subscribeForm">
+					<b:row>
+						<b:column medium-screen="6">
+							<b:inputText required="true" placeholder="Nom" id="inputNom"
+								value="#{mbInscription.nouveauMembre.nom}">
+								<f:facet name="prepend">
+									<b:icon name="user" />
+								</f:facet>
+							</b:inputText>
+						</b:column>
+						<b:column medium-screen="6">
+							<b:inputText required="true" placeholder="Prenom"
+								id="inputPrenom" value="#{mbInscription.nouveauMembre.prenom}">
+							</b:inputText>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="6">
+							<b:dateTimePicker required="true" allow-input-toggle="true"
+								use-current="false" icon-position="left" show-time="false"
+								placeholder="Date de Naissance" id="inputDob"
+								value="#{mbInscription.nouveauMembre.dateNaissance}">
+								<f:convertDateTime pattern="dd/MM/yyyy"></f:convertDateTime>
+							</b:dateTimePicker>
+						</b:column>
+						<b:column medium-screen="6">
+							<b:panelGrid columns="2" required="true">
+								<b:radiobutton value="#{mbInscription.nouveauMembre.sexe}"
+									itemLabel="Homme" itemValue="1" />
+								<b:radiobutton value="#{mbInscription.nouveauMembre.sexe}"
+									itemLabel="Femme" itemValue="2" />
+							</b:panelGrid>
+							<br />
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="12">
+							<b:inputText required="true" placeholder="Mail" id="inputMail"
+								mask="email" value="#{mbInscription.nouveauMembre.email}">
+								<f:facet name="prepend">
+									<b:iconAwesome name="envelope-o" />
+								</f:facet>
+							</b:inputText>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="12">
+							<b:inputSecret required="true" placeholder="Password"
+								id="inputPassword"
+								value="#{mbInscription.nouveauMembre.password}">
+								<f:facet name="prepend">
+									<b:iconAwesome name="key" />
+								</f:facet>
+							</b:inputSecret>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column medium-screen="4" offset="8">
+							<b:commandButton action="#{mbInscription.test()}"
+								value="Inscription" look="primary" style="width:100%" />
+						</b:column>
+					</b:row>
+				</h:form>
+			</b:panel>
+		</b:column>
+		<b:column medium-screen="6">
+			<b:row>
+				<b:panel title="Connexion" collapsible="false" look="primary">
+					<h:form id="loginForm">
+						<b:row>
+							<b:column medium-screen="5">
+								<b:inputText mask="email" placeholder="Mail" id="inputMail"
+									value="#{mbSession.mail}">
+									<f:facet name="prepend">
+										<b:iconAwesome name="envelope-o" />
+									</f:facet>
+								</b:inputText>
+							</b:column>
+							<b:column medium-screen="5">
+								<b:inputSecret placeholder="Password" id="inputPassword"
+									value="#{mbSession.password}">
+									<f:facet name="prepend">
+										<b:iconAwesome name="key" />
+									</f:facet>
+								</b:inputSecret>
+							</b:column>
+							<b:column medium-screen="2">
+								<b:commandButton value="Go!" action="#{mbSession.connexion()}" look="primary" style="width:100%" />
+							</b:column>
+						</b:row>
+					</h:form>
+				</b:panel>
+			</b:row>
+			<b:row>
+				<b:panel title="Social Auth" collapsible="false" look="primary">
+					<h:form id="socialLoginForm">
+						<b:row>
+							<b:column medium-screen="12">
+								<b:commandButton value="Se connecter avec Facebook"
+									action="#{mbSession.connexionAuth()}" look="primary"
+									style="width:100%" />
+							</b:column>
+						</b:row>
+					</h:form>
+				</b:panel>
+			</b:row>
+		</b:column>
+		<h:outputLabel value="#{mbSession.membreConnecte.prenom}" rendered="#{mbSession.membreConnecte != null}"/>
+	</b:container>
+</h:body>
+</html>

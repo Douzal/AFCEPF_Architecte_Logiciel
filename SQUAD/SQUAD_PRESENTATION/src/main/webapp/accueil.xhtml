@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Accueil membre</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/accueil.css" position="last" />
+	</ui:define>
+
+	<ui:define name="content-membre">
+		<h:form id="formAccueil">
+			<b:container fluid="true">
+				<b:row>
+					<b:column col-sm="7">
+						<b:panel style="height:260px">
+							<b:row>
+								<b:column col-sm="8" style="margin-left:3.5vh">
+									<b:inputText placeholder="Ville">
+										<f:facet name="prepend">
+											<b:iconAwesome name="fas fa-search"></b:iconAwesome>
+										</f:facet>
+									</b:inputText>
+								</b:column>
+							</b:row>
+							<b:row>
+								<b:column col-sm="3">
+									<b:dropButton value="Sport" style="margin:0"></b:dropButton>
+								</b:column>
+								<b:column col-sm="3">
+									<b:dropButton value="Filtre?">
+										<b:navLink value="Weeeeee!" href="#"></b:navLink>
+									</b:dropButton>
+								</b:column>
+								<b:column col-md="3">
+									<b:dropButton value="Autre?">
+										<b:navLink value="Whatever" href="#"></b:navLink>
+									</b:dropButton>
+								</b:column>
+							</b:row>
+						</b:panel>
+					</b:column>
+					<b:column col-sm="5">
+						<div id="divCalendar">
+							<b:dateTimePicker id="dateTP" value="#{mbCalendrier.date}"
+								show-date="true" ajax="true"
+								ondtchange="ajax:#{mbCalendrier.date}" update="@this"
+								show-time="false" mode="inline">
+							</b:dateTimePicker>
+							<b:commandButton col-md="12" value="Rechercher">
+								<f:ajax event="click"
+									listener="#{mbCalendrier.afficheRencByDate()}"
+									render=":formAccueil:listeRenc" />
+							</b:commandButton>
+						</div>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column col-sm="7" id="listeRenc">
+						<ui:repeat var="renc" value="#{mbCalendrier.rencontres}">
+							<b:panel collapsed="true" style="text-align:left">
+								<f:facet name="heading">
+									<h:outputText value="#{renc.dateDebut}">
+										<f:convertDateTime pattern="dd/MM/yyyy" />
+									</h:outputText>
+									<h:outputText value="#{renc.libelle}" style="font-size:18px" />
+									<h:outputText value="#{renc.sport}" />
+								</f:facet>
+								<h:outputText value="#{renc.description}" />
+								<br />
+								<b><label style="margin-right: 10px">Organisateur :</label></b>
+								<h:outputText value="#{renc.organisateur.nom}" />
+								<br />
+								<h:outputText value="#{renc.adresse}" style="margin-right:10px" />
+								<h:outputText value="#{renc.codePostal}"
+									style="margin-right:10px" />
+								<h:outputText value="#{renc.ville}" />
+								<br />
+								<b:commandButton value="Détails" styleClass="btnDetail" style=""></b:commandButton>
+							</b:panel>
+						</ui:repeat>
+					</b:column>
+					<b:column col-sm="5">
+						<div id="divMap"></div>
+					</b:column>
+				</b:row>
+			</b:container>
+		</h:form>
+		<!-- 		<h:outputScript> -->
+		<!-- 		function updateDate() { -->
+		<!-- 		let x = document.getElementById("#formAccueil:dateTP").value; -->
+		<!-- 		 alert("changement date: " + x.toString()); -->
+		<!-- 		} -->
+		<!-- 		</h:outputScript> -->
+	</ui:define>
+</ui:composition>
+</html>

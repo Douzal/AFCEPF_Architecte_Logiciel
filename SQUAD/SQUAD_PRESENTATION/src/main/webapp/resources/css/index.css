@@ -1,0 +1,47 @@
+/* .content-visiteur {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+}
+ */
+#formConnexion\:cnx {
+	
+	width: 80vh;
+	background-color: white;
+	padding-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid gainsboro;
+}
+
+#formConnexion\:saisie {
+	width : 70%;
+	height: 25vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	
+}
+
+#formConnexion\:btn-connexion {
+	width: 100%;
+	font-size: 1.3em;
+	color: white;
+	border: none;
+	border-radius: 3px;
+	padding: 5px;
+}
+
+#formConnexion\:cnx input[type="text"] {
+	background-color: whitesmoke;
+	border: 1px solid gainsboro;
+	
+}
+
+#formConnexion\:cnx input[type="text"]:focus {
+	border: 1px solid dimgrey;
+}

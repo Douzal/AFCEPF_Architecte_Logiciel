@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<ui:composition template="/WEB-INF/template.xhtml">
+	<ui:define name="contenu">
+	<h:form>
+		<span>nom : </span>
+		<h:inputText value="#{mbInscription.part.nom}" /><br />
+		<span>mail : </span>
+		<h:inputText value="#{mbInscription.part.mail}" /><br />
+		<span>mdp : </span>
+		<h:inputSecret value="#{mbInscription.part.password}" /><br />
+		<span>naissance : </span>
+		<h:inputText value="#{mbInscription.part.dob}" >
+			<f:convertDateTime pattern="dd/MM/yyyy" 
+							   timeZone="Europe/Paris"/>
+		</h:inputText><br />
+		<h:commandButton action="#{mbInscription.ajouter()}" 
+						 value="Ajouter" />
+	</h:form>
+	<span>#{mbInscription.message}</span>
+	</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head>
+	<f:metadata>
+		<f:event listener="#{mbConnect.deconnexion()}" type="preRenderView"></f:event>
+	</f:metadata>
+</h:head> 
+<body> 
+
+	<h:form id="form">
+	<h:messages globalOnly="true"/>
+		<label>Utilisateur en session</label><h:outputLabel value="#{mbConnect.personne.nom}"/>
+		<h1>Connexion</h1>
+		<label>login: </label><h:inputText value="#{mbConnect.login}" id="login" required="true"/>
+		<h:message for="login"/>
+		<br/>
+		<label>password: </label> <h:inputSecret value="#{mbConnect.password}" required="true"/>
+		<br/>
+		<h:commandButton action="#{mbConnect.connect()}" value="Connexion" />
+		
+	</h:form>
+</body> 
+</html>

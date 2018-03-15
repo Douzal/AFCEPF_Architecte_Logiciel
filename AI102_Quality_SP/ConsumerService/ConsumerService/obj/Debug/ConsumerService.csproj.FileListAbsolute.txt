@@ -1,0 +1,7 @@
+C:\Users\Formation\Desktop\repo_git\ai102_quality\COURS\ConsumerService\ConsumerService\obj\Debug\ConsumerService.csprojResolveAssemblyReference.cache
+C:\Users\Formation\Desktop\repo_git\ai102_quality\COURS\ConsumerService\ConsumerService\obj\Debug\ConsumerService.csproj.CoreCompileInputs.cache
+C:\Users\Formation\Desktop\repo_git\ai102_quality\COURS\ConsumerService\ConsumerService\bin\Debug\ConsumerService.exe.config
+C:\Users\Formation\Desktop\repo_git\ai102_quality\COURS\ConsumerService\ConsumerService\bin\Debug\ConsumerService.exe
+C:\Users\Formation\Desktop\repo_git\ai102_quality\COURS\ConsumerService\ConsumerService\bin\Debug\ConsumerService.pdb
+C:\Users\Formation\Desktop\repo_git\ai102_quality\COURS\ConsumerService\ConsumerService\obj\Debug\ConsumerService.exe
+C:\Users\Formation\Desktop\repo_git\ai102_quality\COURS\ConsumerService\ConsumerService\obj\Debug\ConsumerService.pdb

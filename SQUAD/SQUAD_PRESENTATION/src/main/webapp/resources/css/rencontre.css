@@ -1,0 +1,59 @@
+body {
+	background-color: #e8edf7;
+}
+#formRencontre {
+	background-color: whitesmoke;
+	max-width: 1200px;
+	margin: auto;
+	margin-top: 40px;
+	padding-top: 40px;
+	color: #3c4451;
+	min-height: 800px;
+}
+#formRencontre h2{
+	margin-top: 40px;
+	margin-bottom: 40px;
+	text-align: center;
+	text-transform: uppercase;
+	font-size: 20px;
+	
+	font-weight: 300;
+}
+#formRencontre #btnRencontre {
+	height: 100px;
+	width: 90%;
+	cursor: pointer;
+	border: 1px solid black;
+}
+
+#btnRDV, #btnEvent {
+	display: inline-block;
+	background-color: white;
+	height: 60px;
+	width: 100%;
+	cursor: pointer;
+	_border : 1px solid black;
+	text-align: center;
+	border-radius: 2px;
+	padding-top: 16px;
+	font-size: 18px;
+}
+#btnRDV:hover, #btnEvent:hover {
+	-moz-box-shadow: 1px 1px 15px 6px #cfcfcf;
+	-webkit-box-shadow: 1px 1px 15px 6px #cfcfcf;
+	-o-box-shadow: 1px 1px 15px 6px #cfcfcf;
+	box-shadow: 1px 1px 15px 6px #cfcfcf;
+	color: black;
+}
+#formRencontre button {
+	_height: 100px;
+}
+#output-rdv, #output-event {
+	display: none;
+}
+#output-rdv h2, #output-event h2 {
+	margin-bottom: 10px;
+}
+#output-rdv h3, #output-event h3 {
+	font-size: 16px;
+}

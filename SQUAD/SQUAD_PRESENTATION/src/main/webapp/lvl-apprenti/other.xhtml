@@ -1,0 +1,413 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<h:outputScript library="js" name="script-gmap-select-terrain.js" />
+
+	<style>
+#map {
+	width: 100%;
+	height: 425px;
+}
+
+.controls {
+	margin-top: 10px;
+	border: 1px solid transparent;
+	border-radius: 2px 0 0 2px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	height: 32px;
+	outline: none;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#pac-input {
+	background-color: #fff;
+	font-family: Roboto;
+	font-size: 15px;
+	font-weight: 300;
+	margin-left: 12px;
+	padding: 0 11px 0 13px;
+	text-overflow: ellipsis;
+	width: 300px;
+}
+
+#pac-input:focus {
+	border-color: #4d90fe;
+}
+
+.pac-container {
+	font-family: Roboto;
+}
+</style>
+</h:head>
+<h:body>
+
+	<b:navBar brand="SQUAD" brandHref="#" fixed="top" sticky="true"
+		fluid="true">
+		<b:navbarLinks>
+			<b:navLink value="Link" href="#"></b:navLink>
+			<b:navLink value="Link" href="#"></b:navLink>
+			<b:dropMenu value="Dropdown" iconAwesome="birthday-cake">
+				<b:navLink value="Action" href="#"></b:navLink>
+				<b:navLink value="Another action" href="#"></b:navLink>
+				<b:navLink value="Something else here" href="#"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink header="Nav header"></b:navLink>
+				<b:navLink value="Separated link" href="#"></b:navLink>
+				<b:dropMenu value="Nested submenu" iconAwesome="birthday-cake"
+					iconAlign="right">
+					<b:navLink value="You can nest menus" href="#"></b:navLink>
+					<b:dropMenu value="Nested sub-submenu">
+						<b:navLink value="... as deep as ..." href="#"></b:navLink>
+						<b:dropMenu value="Nested sub-sub-submenu">
+							<b:navLink value="... you want!" href="#"></b:navLink>
+						</b:dropMenu>
+					</b:dropMenu>
+
+				</b:dropMenu>
+				<b:navLink value="One more separated link" href="#"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+		<form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs"
+			role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" />
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+		<!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
+		<b:navbarLinks pull="right">
+			<b:navLink value="    " href="#"></b:navLink>
+		</b:navbarLinks>
+		<b:navbarLinks pull="right" styleClass="hidden-xs">
+			<b:navLink value="Link" href="#"></b:navLink>
+			<b:dropMenu value="Dropdown">
+				<b:navLink value="Action" href="#"></b:navLink>
+				<b:navLink value="Another action" href="#"></b:navLink>
+				<b:navLink value="Something else here" href="#"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink header="Nav header"></b:navLink>
+				<b:navLink value="Separated link" href="#"></b:navLink>
+				<b:navLink value="One more separated link" href="#"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+	</b:navBar>
+	<h:form id="formCreationRencontre">
+		<b:container style="padding-top:80px;height:100vh;" id="step1">
+
+			<b:row>
+
+				<b:column col-md="10" offset-md="1">
+
+					<b:column col-md="7">
+						<b:panel collapsible="false" title="Nature de la rencontre">
+							<b:well col-md="12" id="vignetteRdv"
+								style="box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.75);">
+								<b:column col-md="4" style="background:green;height:150px"></b:column>
+								<b:column col-md="8">
+									<div style="height: 120px;">
+										<b>RENDEZ VOUS</b> <br />
+										<p>contenant du sens est source de distractions, et
+											empêche de se concentrer sur la mise en page elle-même.
+											L'avantage du</p>
+									</div>
+									<b:commandButton look="primary" value="Selectionner"
+										style="border-radius:2px;margin:2px;padding:2px;width:100%;">
+										<f:ajax event="click"
+											listener="#{mbCreationRencontre.changeNatureToRencontre()}" />
+									</b:commandButton>
+								</b:column>
+							</b:well>
+
+							<b:well col-md="12" id="vignetteChampionnat"
+								style="box-shadow: 2px 2px 15px 0px rgba(0,0,0,0.75);">
+								<b:column col-md="4" style="background:blue;height:150px"></b:column>
+								<b:column col-md="8">
+									<div style="height: 120px;">
+										<b>CHAMPIONNAT</b> <br />
+										<p>contenant du sens est source de distractions, et
+											empêche de se concentrer sur la mise en page elle-même.
+											L'avantage du</p>
+									</div>
+									<b:commandButton look="primary" value="Selectionner"
+										style="border-radius:2px;margin:2px;padding:2px;width:100%;">
+										<f:ajax event="click"
+											listener="#{mbCreationRencontre.changeNatureToEvenement()}" />
+									</b:commandButton>
+
+								</b:column>
+							</b:well>
+						</b:panel>
+
+
+					</b:column>
+					<b:column col-md="5">
+						<b:well style="overflow:auto;">
+							<b:inputText value="#{mbCreationRencontre.recherche}" col-md="12"
+								id="rechercheSport" placeholder="Chercher un sport ">
+								<f:facet name="prepend">
+									<b:icon name="cog" />
+								</f:facet>
+								<f:ajax event="keyup"
+									listener="#{mbCreationRencontre.rechercheSport()}"
+									render="listeSports"></f:ajax>
+							</b:inputText>
+
+							<b:column id="listeSports" col-md="12"
+								style="overflow-y:scroll;height:400px;">
+
+								<ui:repeat var="sport" value="#{mbCreationRencontre.sports}">
+
+									<b:commandButton col-md="12"
+										style="border-radius:2px;margin-top:5px;margin-bottom:5px;"
+										value="#{sport.libelle}" onclick="selectSport(this)">
+										<f:ajax
+											listener="#{mbCreationRencontre.selectionSport(sport)}"
+											event="click" execute="@this"></f:ajax>
+									</b:commandButton>
+								</ui:repeat>
+							</b:column>
+						</b:well>
+					</b:column>
+				</b:column>
+
+				<b:column col-md="10" offset-md="1">
+					<b:button id="goStep2" col-md="4" offset-md="8" look="primary"
+						value="Etape suivante" />
+				</b:column>
+			</b:row>
+
+		</b:container>
+		<br />
+		<!-- ************************STEP2********************************* -->
+
+		<b:container style="padding-top:80px;height:100vh;display:none;"
+			id="step2">
+
+			<b:row>
+
+				<b:column col-md="10" offset-md="1">
+
+					<b:well col-md="12">
+						<b:inputText required="true"
+							value="#{mbCreationRencontre.rencontre.libelle}"
+							placeholder="Titre" col-md="12">
+						</b:inputText>
+
+						<b:inputTextarea
+							value="#{mbCreationRencontre.rencontre.description}" rows="4"
+							placeholder="Description" col-md="12">
+						</b:inputTextarea>
+
+						<b:formGroup style="margin-bottom:0px;">
+							<b:dateTimePicker
+								value="#{mbCreationRencontre.rencontre.dateDebut}" col-md="6"
+								show-icon="false" allow-input-toggle="true" format=""
+								placeholder="date/heure début">
+								<f:convertDateTime pattern="dd-mm-yyyy" />
+							</b:dateTimePicker>
+
+							<b:dateTimePicker
+								value="#{mbCreationRencontre.rencontre.dateFin}" col-md="6"
+								show-icon="false" allow-input-toggle="true"
+								placeholder="date/heure fin">
+
+							</b:dateTimePicker>
+						</b:formGroup>
+					</b:well>
+					<br />
+					<b:well col-md="12" collapsible="false" style="color:gray;">
+						<br />
+						<b:formGroup>
+							<b:inputText required="false"
+								value="#{mbCreationRencontre.rencontre.nbMaxPart}"
+								placeholder="Nombre max participants" col-md="6">
+							</b:inputText>
+
+							<!-- 							<b:selectOneMenu colMd="6" required="false" -->
+							<!-- 								value="#{mbCreationRencontre.rencontre.sexe}"> -->
+							<!-- 								<f:selectItem itemLabel="Mixte" itemValue="0" value="0" /> -->
+							<!-- 								<f:selectItem itemLabel="Homme" itemValue="1" value="1" /> -->
+							<!-- 								<f:selectItem itemLabel="Femme" itemValue="2" value="2" /> -->
+							<!-- 							</b:selectOneMenu> -->
+						</b:formGroup>
+						<br />
+						<center>
+							<b:selectBooleanCheckbox
+								value="#{mbCreationRencontre.orgaParticipant}" col-md="12"
+								caption=": l'organisateur(vous) est également participant" />
+						</center>
+					</b:well>
+				</b:column>
+
+				<b:column col-md="10" offset-md="1">
+					<b:button id="goStep3" col-md="4" offset-md="8" look="primary"
+						value="Etape suivante" />
+				</b:column>
+			</b:row>
+
+		</b:container>
+		<br />
+		<!-- ************************STEP3********************************* -->
+
+		<b:container style="padding-top:80px;height:100vh;display:none;"
+			id="step3">
+
+			<b:row>
+				<b:column col-md="12">
+					<b:column col-md="7">
+						<b:well col-md="12">
+							<input id="pac-input" class="controls" type="text"
+								placeholder="Indiquer une ville" />
+							<div id="map"></div>
+						</b:well>
+					</b:column>
+
+					<b:column col-md="5">
+
+						<b:well col-md="12">
+							<h5 style="color: gray; margin-top: 0px;">SELECTIONNER LE
+								LIEU :</h5>
+							<div id="resultatRechercheTerrains"
+								style="background-color: #e5e5e5; height: 400px; overflow-y: scroll;">
+
+							</div>
+						</b:well>
+
+					</b:column>
+				</b:column>
+
+				<h:inputHidden value="#{mbCreationRencontre.rencontre.adresse}"
+					id="inputAdresse" />
+				<h:inputHidden value="#{mbCreationRencontre.rencontre.adresseLat}"
+					id="inputAdresseLat" />
+				<h:inputHidden value="#{mbCreationRencontre.rencontre.adresseLong}"
+					id="inputAdresseLong" />
+				<h:inputHidden value="#{mbCreationRencontre.rencontre.codePostal}"
+					id="inputCodePostal" />
+				<h:inputHidden value="#{mbCreationRencontre.rencontre.ville}"
+					id="inputVille" />
+
+				<b:column col-md="12">
+					<b:commandButton id="goStep4" col-md="4" offset-md="8"
+						look="primary" value="Etape suivante"
+						action="#{mbCreationRencontre.posterRencontre()}" />
+				</b:column>
+			</b:row>
+		</b:container>
+
+		<!-- ************************STEP4 invitation squad********************************* -->
+
+		<b:container style="padding-top:80px;height:100vh;display:none;"
+			id="step4">
+
+			<b:row>
+
+				<b:column col-md="10" offset-md="1" id="listeSquadInvitation">
+
+					<b:row>
+						<ui:repeat var="squad"
+							value="#{mbCreationRencontre.squadsSportSelectionne}">
+							<b:column col-sm="6" col-md="4">
+								<b:thumbnail>
+									<img data-src="" style="width: 300px;height: 300px; background-color: gray"
+										alt="Generic placeholder thumbnail" />
+									<f:facet name="caption">
+										<h3>#{squad.nom}</h3>
+											<b:button onclick="ajax:#{mbCreationRencontre.selectionnerSquadAInviter(squad)}" look="primary" value="Inviter" />
+									</f:facet>
+								</b:thumbnail>
+							</b:column>
+
+
+						</ui:repeat>
+					</b:row>
+
+				</b:column>
+
+				<b:column col-md="10" offset-md="1">
+					<b:button id="valider" col-md="4" offset-md="8" look="primary"
+						value="Etape suivante" />
+				</b:column>
+			</b:row>
+
+		</b:container>
+		<br />
+	</h:form>
+
+	<script type="text/javascript">
+	$(function() {
+
+		$("#formCreationRencontre\\:vignetteRdv").on("click",function() {
+			$(this).css({"background-color":"#bac8e0"});
+			$("#formCreationRencontre\\:vignetteChampionnat").css({"background-color":"#f5f5f5"});
+		});
+
+		$("#formCreationRencontre\\:vignetteChampionnat").on("click",function() {
+			$(this).css({"background-color":"#bac8e0"});
+			$("#formCreationRencontre\\:vignetteRdv").css({"background-color":"#f5f5f5"});
+			
+		});
+
+		$("#formCreationRencontre\\:goStep2").on("click",function() {
+			console.log("step2");
+			$("#formCreationRencontre\\:step2").show("slow");
+			$('html, body').animate({
+		        scrollTop: $("#formCreationRencontre\\:step2").offset().top
+		    }, 2000);
+			
+		});
+
+		$("#formCreationRencontre\\:goStep3").on("click",function() {
+			console.log("step3");
+			$("#formCreationRencontre\\:step3").show();
+
+			$('html, body').animate({
+		        scrollTop: $("#formCreationRencontre\\:step3").offset().top
+		    }, 2000);
+
+			initAutocomplete();
+
+		});
+
+		$("#formCreationRencontre\\:goStep4").on("click",function() {
+			console.log("step2");
+			$("#formCreationRencontre\\:step4").show("slow");
+			$('html, body').animate({
+		        scrollTop: $("#formCreationRencontre\\:step2").offset().top
+		    }, 2000);
+			
+		});
+
+	});
+
+	function selectSport(item) {
+
+		sportSelected = item.innerHTML;
+
+		console.log(sportSelected);
+		
+		$("#formCreationRencontre\\:listeSports button").each(function() {
+			$(this).css({"background-color":"white"});
+		});
+
+		item.style.backgroundColor = "blue";
+
+		return false;
+	}
+	</script>
+
+	<script
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places"
+		async="async" defer="defer"></script>
+</h:body>
+</html>
+

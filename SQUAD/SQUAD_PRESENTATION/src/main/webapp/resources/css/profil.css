@@ -1,0 +1,11 @@
+.photoSquad {
+    width:124px !important;
+    height: 124px !important;
+    margin-top:30px!important;
+}
+
+.avatar-profil {
+	width:40px !important;
+    height: 40px !important;
+    border-radius: 50% !important;
+}

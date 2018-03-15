@@ -1,0 +1,28 @@
+package fr.afcepf.al31.controller;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
+
+private Logger 
+public class FormulaireServlet extends HttpServlet {
+
+    private Logger log = Logger.getLogger(getClass());
+    
+    @Override
+    protected void doPost(HttpServletRequest paramReq, HttpServletResponse paramResp)
+            throws ServletException, IOException {
+//        super.doPost(paramReq, paramResp);
+    }
+    @Override
+    protected void doGet(HttpServletRequest paramReq, HttpServletResponse paramResp)
+            throws ServletException, IOException {
+//        super.doGet(paramReq, paramResp);
+    }
+  
+}

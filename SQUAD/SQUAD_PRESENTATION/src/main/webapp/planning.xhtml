@@ -1,0 +1,137 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Planning</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/planning.css" position="last"/>
+		<h:outputStylesheet name="css/gmap.css" position="last" />
+	</ui:define>
+	<ui:define name="js">
+		<h:outputScript name="js/gmap-rencontre.js" position="last" />
+	</ui:define>
+	<ui:define name="content-membre">
+		<b:container fluid="true">
+				<b:row style-class="titre-page">
+					<h2>Mon planning</h2> 
+				</b:row>
+				
+					<b:panel col-md="6" offset-md="1" styleClass="resultat-recherche" id="resultat-recherche">
+						<b:badge value="#{mbMembre.totalParticipations.size()} participations" />
+						<p>
+							<b:label severity="warning" text="#{mbMembre.filtreVille}"></b:label>
+							<b:label severity="warning" text="#{mbMembre.filtreSport}"></b:label>
+							<b:label severity="warning" text="#{mbMembre.date}"></b:label>
+						</p>
+						
+						<h:form>
+						
+						<!-- *** REPEAT INFOS PARTICIPATIONS *** -->
+						
+							<ui:repeat var="participation" value="#{mbMembre.participations}">
+								
+								<b:panel col-md="12">
+									<b:row>
+										<b:panel style-class="date-recap" style="height: 160px; background-color: #{participation.rencontre.sport.couleur}" col-md="2" col-lg="2">
+												<h:outputLabel value="#{participation.rencontre.dateDebut}">
+													<f:convertDateTime locale="fr" type="date" dateStyle="medium" pattern="d MMM" />
+												</h:outputLabel>
+												<h:graphicImage value="#{participation.rencontre.sport.icone}" style="width: 30px; height: 30px;"/>
+										</b:panel>
+										
+										<!-- Partie de droite : bouton pour aller à la page de l'event -->
+										
+										<b:commandButton col-md="10" col-lg="10" style="text-align: left; width: 100%; margin: 0px;" action="#{mbNav.afficherRencontre(participation.rencontre)}">
+											<h:outputText value="#{participation.rencontre.dateDebut}" style="color: #c3c2c2;">
+												<f:convertDateTime locale="fr" timeStyle="short" type="both" dateStyle="full" />
+											</h:outputText>
+											
+											<h4>#{participation.rencontre.libelle}</h4>
+											
+											<h:graphicImage styleClass="avatar" value="#{participation.rencontre.organisateur.photo}" />
+											<h:outputText value="#{participation.rencontre.organisateur.prenomNomTronque}" style="padding-left: 10px;"/>
+											<h:outputText value=" (Organisateur)" style="color: #c3c2c2;"/>
+											<br/>
+											<p>
+												<b:iconAwesome name="users" />
+												#{mbMembre.getParticipantsByRencontre(participation.rencontre).size()} participants
+												<h:panelGroup rendered="#{mbMembre.placesRestantesRencontre(participation.rencontre)} it 10"> | <b:iconAwesome name="hourglass-half"/> #{mbMembre.placesRestantesRencontre(participation.rencontre)}</h:panelGroup> 
+												
+											</p>
+											
+											<!-- Adresse -->
+											
+											<h:commandLink hreflang="detailRencontre.xhtml" styleClass="adresse">
+											<b:iconAwesome name="map-marker-alt"></b:iconAwesome>
+												#{participation.rencontre.adresse}, #{participation.rencontre.codePostal} #{participation.rencontre.ville}
+											</h:commandLink>
+								
+										</b:commandButton>
+									</b:row>
+								</b:panel>
+							</ui:repeat>
+							
+							<!-- *** FIN REPEAT INFOS PARTICIPATIONS *** -->
+						</h:form>
+					</b:panel>
+				
+					<!-- Panel de droite -->
+				
+					<b:panel col-md="4" col-lg="4" style="height: 480px;">
+						
+						<!-- *** FILTRE SPORT *** -->
+						
+						<b:row style="margin-bottom: 20px;">
+							<b:column col-lg="4" col-md="4">
+								<h:form id="formSport">
+									<b:inputText placeholder="Sport" typeahead="true" typeahead-values="#{mbMembre.libelleSports}" tiny-screen="full-width" value="#{mbMembre.filtreSport}" col-lg="12">
+										<f:ajax listener="#{mbMembre.filtrerSport()}" event="keyup" render="resultat-recherche"></f:ajax>
+									</b:inputText>
+								</h:form>
+							</b:column>
+						
+						<!-- *** FILTRE DATE *** -->
+							<h:form>
+							<b:column col-lg="4" col-md="4">
+								<b:dateTimePicker mode="plain" value="#{mbMembre.filtreDate}"
+										show-icon="false" format="DD/MM/YYYY HH:mm"
+										locale="fr" allow-input-toggle="true"
+										placeholder="Date"/>
+							</b:column>
+							<b:column col-lg="4">	
+								<b:commandButton action="#{mbMembre.filtrerDate()}" icon-awesome="search" value="Rechercher" style-class="bouton-recherche" />
+							</b:column>
+							</h:form>
+						</b:row>
+						
+						<!-- *** FILTRE VILLE *** -->
+						<b:row>
+							<b:column col-lg="12">
+								<input id="pac-input" class="controls" type="text" placeholder="Ville"></input>
+				    			<div id="map"></div>
+				    			<h:form id="formMap">
+					    			<h:inputHidden value="#{mbMembre.filtreVille}" id="ville" />
+					    			<h:inputHidden value="#{mbMembre.rencontres}" id="rencontres"/>
+					    			<b:commandButton action="#{mbMembre.filtrerVille()}" style="display: none" id="filtrer"/>
+				    			</h:form>
+							</b:column>
+						</b:row>
+					</b:panel>
+				
+					
+
+		</b:container>
+		
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places&amp;callback=initAutocomplete"
+			async="async" defer="defer"></script>
+
+	</ui:define>
+</ui:composition>
+</html>

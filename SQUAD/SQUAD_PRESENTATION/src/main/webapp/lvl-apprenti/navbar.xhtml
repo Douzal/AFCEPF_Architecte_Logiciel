@@ -1,0 +1,244 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+</h:head>
+<h:body>
+
+	<b:navBar brand="SQUAD" brandHref="#" fixed="top" sticky="true"
+		fluid="true">
+		<b:navbarLinks>
+			<b:navLink value="Link" href="#"></b:navLink>
+			<b:navLink value="Link" href="#"></b:navLink>
+			<b:dropMenu value="Dropdown" iconAwesome="birthday-cake">
+				<b:navLink value="Action" href="#"></b:navLink>
+				<b:navLink value="Another action" href="#"></b:navLink>
+				<b:navLink value="Something else here" href="#"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink header="Nav header"></b:navLink>
+				<b:navLink value="Separated link" href="#"></b:navLink>
+				<b:dropMenu value="Nested submenu" iconAwesome="birthday-cake"
+					iconAlign="right">
+					<b:navLink value="You can nest menus" href="#"></b:navLink>
+					<b:dropMenu value="Nested sub-submenu">
+						<b:navLink value="... as deep as ..." href="#"></b:navLink>
+						<b:dropMenu value="Nested sub-sub-submenu">
+							<b:navLink value="... you want!" href="#"></b:navLink>
+						</b:dropMenu>
+					</b:dropMenu>
+
+				</b:dropMenu>
+				<b:navLink value="One more separated link" href="#"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+		<form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs"
+			role="search">
+			<div class="form-group">
+				<input type="text" class="form-control" />
+			</div>
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+		<!-- Following line is needed for TBS 3.0.1 (panel content overflow issue) -->
+		<b:navbarLinks pull="right">
+			<b:navLink value="    " href="#"></b:navLink>
+		</b:navbarLinks>
+		<b:navbarLinks pull="right" styleClass="hidden-xs">
+			<b:navLink value="Link" href="#"></b:navLink>
+			<b:dropMenu value="Dropdown">
+				<b:navLink value="Action" href="#"></b:navLink>
+				<b:navLink value="Another action" href="#"></b:navLink>
+				<b:navLink value="Something else here" href="#"></b:navLink>
+				<b:navLink></b:navLink>
+				<b:navLink header="Nav header"></b:navLink>
+				<b:navLink value="Separated link" href="#"></b:navLink>
+				<b:navLink value="One more separated link" href="#"></b:navLink>
+			</b:dropMenu>
+		</b:navbarLinks>
+	</b:navBar>
+	<h:form id="formCreationRencontre">
+		<b:container style="padding-top:80px;height:100vh;" id="step1">
+
+			<b:row>
+
+				<b:column col-md="12">
+
+					<b:column col-md="6">
+						<b:panel collapsible="false" title="Nature de la rencontre">
+							<b:well col-md="12" id="vignetteRdv" style="cursor: pointer;">
+								<b:column col-md="4" style="background:green;height:150px"></b:column>
+								<b:column col-md="8">
+									<b>RENDEZ VOUS</b>
+									<br />
+									<p>contenant du sens est source de distractions, et empêche
+										de se concentrer sur la mise en page elle-même. L'avantage du
+										Lorem Ipsum sur un texte générique comme 'Du texte. Du texte.
+										Du texte.' est qu'il possèdebution</p>
+
+								</b:column>
+							</b:well>
+
+							<b:well col-md="12" id="vignetteChampionnat" style="cursor: pointer;">
+								<b:column col-md="4" style="background:blue;height:150px"></b:column>
+								<b:column col-md="8">
+									<b>CHAMPIONNAT</b>
+									<br />
+									<p>contenant du sens est source de distractions, et empêche
+										de se concentrer sur la mise en page elle-même. L'avantage du
+										Lorem Ipsum sur un texte générique comme 'Du texte. Du texte.
+										Du texte.' est qu'il possèdebution</p>
+
+								</b:column>
+							</b:well>
+						</b:panel>
+
+
+					</b:column>
+					<b:column col-md="6">
+						<b:well style="overflow:auto;">
+							<b:inputText col-md="12" id="usernameDiv"
+								placeholder="Chercher un sport ">
+								<f:facet name="prepend">
+									<b:icon name="cog" />
+								</f:facet>
+							</b:inputText>
+
+							<b:column col-md="12" style="overflow-y:scroll;height:400px;">
+							.
+							</b:column>
+						</b:well>
+					</b:column>
+				</b:column>
+
+				<b:column col-md="12">
+					<b:button id="goStep2" col-md="4" offset-md="8" look="primary"
+						value="Etape suivante" />
+				</b:column>
+			</b:row>
+
+		</b:container>
+		
+<!-- ************************STEP2********************************* -->
+
+		<b:container style="padding-top:80px;height:100vh;display:none" id="step2">
+
+			<b:row>
+
+				<b:column col-md="10" offset-md="1">
+
+					<b:well col-md="12">
+							<b:inputText required="true" placeholder="Titre" col-md="12">
+							</b:inputText>
+
+							<b:inputTextarea rows="4" placeholder="Description" col-md="12">
+							</b:inputTextarea>
+
+							<b:formGroup style="margin-bottom:0px;">
+								<b:dateTimePicker col-md="6" show-icon="false"
+									allow-input-toggle="true" placeholder="date/heure début">
+
+								</b:dateTimePicker>
+
+								<b:dateTimePicker col-md="6" show-icon="false"
+									allow-input-toggle="true" placeholder="date/heure fin">
+
+								</b:dateTimePicker>
+							</b:formGroup>
+						</b:well>
+						<br />
+						<b:well col-md="12" collapsible="false" style="color:gray;">
+						<br />
+							<b:formGroup>
+								<b:inputText required="false"
+									placeholder="Nombre max participants" col-md="6">
+								</b:inputText>
+
+								<b:selectOneMenu colMd="6"
+									required="false">
+									<f:selectItem itemLabel="Mixte" itemValue="0" />
+									<f:selectItem itemLabel="Homme" itemValue="1" />
+									<f:selectItem itemLabel="Femme" itemValue="2" />
+								</b:selectOneMenu>
+							</b:formGroup>
+							<center>
+								<b:selectBooleanCheckbox value="true" col-md="12"
+									caption=": l'organisateur(vous) est également participant" />
+							</center>
+						</b:well>
+				</b:column>
+
+				<b:column col-md="12">
+					<b:commandButton id="goStep3" col-md="4" offset-md="8" look="primary"
+						value="Etape suivante" />
+				</b:column>
+			</b:row>
+
+		</b:container>
+		
+		<!-- ************************STEP3********************************* -->
+		
+		<b:container style="padding-top:80px;height:100vh;display:none" id="step3">
+
+			<b:row>
+
+				<b:column col-md="12" offset-md="1">
+
+					<b:well col-md="9">
+							<div id="mapContainer">
+								<input id="pac-input" class="controls" type="text"
+									placeholder="Indiquer une ville" />
+								<div id="map"></div>
+							</div>
+						</b:well>
+
+						<b:well>
+						
+						
+						</b:well>
+						
+				</b:column>
+
+				<b:column col-md="12">
+					<b:commandButton id="goStep4" col-md="4" offset-md="8" look="primary"
+						value="Etape suivante" />
+				</b:column>
+			</b:row>
+
+		</b:container>
+	</h:form>
+
+	<script type="text/javascript">
+
+	$(function() {
+
+		$("#formCreationRencontre\\:vignetteRdv").on("click",function() {
+			$(this).css({"background-color":"#bac8e0"});
+			$("#formCreationRencontre\\:vignetteChampionnat").css({"background-color":"#f5f5f5"});
+		});
+
+		$("#formCreationRencontre\\:vignetteChampionnat").on("click",function() {
+			$(this).css({"background-color":"#bac8e0"});
+			$("#formCreationRencontre\\:vignetteRdv").css({"background-color":"#f5f5f5"});
+			
+		});
+
+		$("#formCreationRencontre\\:goStep2").on("click",function() {
+			console.log("step2");
+			$("#formCreationRencontre\\:step2").show("slow");
+			$('html, body').animate({
+		        scrollTop: $("#formCreationRencontre\\:step2").offset().top
+		    }, 2000);
+			
+		});
+		
+	});
+	</script>
+</h:body>
+</html>

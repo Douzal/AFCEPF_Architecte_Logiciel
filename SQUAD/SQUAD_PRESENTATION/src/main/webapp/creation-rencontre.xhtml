@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Creation rencontre</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/gmap.css" position="last" />
+	</ui:define>
+	<ui:define name="js">
+		<h:outputScript library="js" name="script-gmap-select-terrain.js" />
+	</ui:define>
+	<ui:define name="content-membre">
+		<b:row style-class="titre-page">
+			<h2>Création d'un événement</h2>
+		</b:row>
+		
+		<!-- *** FIL D'ARIANE *** -->
+		
+		<h2 style="position: fixed; left: 20px; top: 180px;">étapes</h2>
+		<span style="color: #62d7a1;font-size: 450% !important; position: fixed; left: 40px; top: 240px !important;" id="un">&#9312;</span>
+		<span style="display:none; width: 3px; height: 60px; background-color: dimgrey; position: fixed; left: 65px; top: 305px;" id="un-deux"></span>
+		<span style="display:none; color: #62d7a1; font-size: 450% !important; position: fixed; left: 40px; top: 340px !important; " id="deux">&#9313;</span>
+		<span style="display:none; width: 3px; height: 60px; background-color: dimgrey; position: fixed; left: 65px; top: 405px;" id="deux-trois"></span>
+		<span style="display:none; color: #62d7a1; font-size: 450% !important; position: fixed; left: 40px; top: 440px !important; " id="trois">&#9314;</span>
+		<span style="display:none; width: 3px; height: 60px; background-color: dimgrey; position: fixed; left: 65px; top: 505px;" id="trois-quatre"></span>
+		<span style="display:none; color: #62d7a1; font-size: 450% !important; position: fixed; left: 40px; top: 540px !important; " id="quatre">&#9315;</span>
+		                                                            
+		<h:form id="formCreationRencontre">
+			<b:container
+				style="background-color: white; border-radius:5px;padding:15px;"
+				id="step1">
+				<h3 style="margin: 0px; text-align:center;">Le type d'événement</h3>
+				<b:row>
+					<br />
+					<b:column col-md="10" offset-md="1">
+						<b:column col-md="7">
+							<b:well col-md="12" id="vignetteRdv"
+								style="border: 1px solid gainsboro !important; border-radius: 20px;">
+								<b:column col-md="4"
+									style="padding:auto;">
+									<h:graphicImage value="/resources/images/dev/followers.png"
+										style="margin:10px;width:110;height:110px" />
+								</b:column>
+								<b:column col-md="8">
+									<div style="height: 100px;">
+										<h4 id="titre-rdv">RENDEZ-VOUS</h4>
+										<p>Moment sportif informel que ce soit pour se motiver à plusieurs ou simplement rencontrer des sportifs partageant la même passion.</p>
+									</div>
+									<b:commandButton styleClass="bouton-recherche" value="Selectionner">
+										<f:ajax event="click"
+											listener="#{mbCreationRencontre.changeNatureToRencontre()}" />
+									</b:commandButton>
+								</b:column>
+							</b:well>
+
+							<b:well col-md="12" id="vignetteChampionnat"
+								style="border: 1px solid gainsboro !important; border-radius: 20px;">
+								<b:column col-md="4"
+									style="padding:auto;">
+									<h:graphicImage value="/resources/images/dev/trophy.png"
+										style="margin:10px;width:110;height:110px" />
+								</b:column>
+								<b:column col-md="8">
+									<div style="height: 100px; background-color: white;">
+										<h4 id="titre-champ">CHAMPIONNAT</h4>
+										<p>Mesure-toi à d'autres participants en solo ou en équipe et décroche la première place.</p>
+									</div>
+									<b:commandButton styleClass="bouton-recherche" value="Selectionner">
+										<f:ajax event="click"
+											listener="#{mbCreationRencontre.changeNatureToEvenement()}" />
+									</b:commandButton>
+
+								</b:column>
+							</b:well>
+
+
+						</b:column>
+						<b:column col-md="5">
+							<b:well style="overflow:auto;">
+								<b:inputText value="#{mbCreationRencontre.recherche}"
+									col-md="12" id="rechercheSport"
+									placeholder="Chercher un sport ">
+									
+									<f:ajax event="keyup"
+										listener="#{mbCreationRencontre.rechercheSport()}"
+										render="listeSports"></f:ajax>
+								</b:inputText>
+
+								<b:column id="listeSports" col-md="12"
+									style="overflow-y:scroll;height:270px;">
+
+									<ui:repeat var="sport" value="#{mbCreationRencontre.sports}">
+
+										<b:commandButton col-md="12" style-class="bouton-select-sport"
+											style="border-radius:10px;margin-top:5px;margin-bottom:5px;"
+											value="#{sport.libelle}" onclick="selectSport(this)">
+											<f:ajax
+												listener="#{mbCreationRencontre.selectionSport(sport)}"
+												event="click" execute="@this"
+												render=":formCreationRencontre:listeSquadInvitation"></f:ajax>
+										</b:commandButton>
+									</ui:repeat>
+								</b:column>
+							</b:well>
+						</b:column>
+					</b:column>
+
+					<b:column col-md="10" offset-md="1">
+						<b:button id="goStep2" col-md="4" offset-md="8" styleClass="bouton-selection" icon-awesome="chevron-right" icon-align="right" value="Etape suivante" />
+					</b:column>
+				</b:row>
+
+			</b:container>
+			<br />
+			<!-- ************************STEP2********************************* -->
+			<b:container
+				style="margin-top:80px;display:none;background-color:white;border-radius:5px;padding:15px;"
+				id="step2">
+				<h3 style="margin-bottom: 20px; text-align:center;">Les informations pratiques</h3>
+				<b:row>
+
+					<b:column col-md="10" offset-md="1">
+						<b:column col-md="7">
+							<b:well col-md="12" style="height:390px">
+								<br />
+								<b:inputText required="true"
+									value="#{mbCreationRencontre.rencontre.libelle}"
+									placeholder="Titre" col-md="12">
+								</b:inputText>
+
+								<b:inputTextarea
+									value="#{mbCreationRencontre.rencontre.description}" rows="4"
+									placeholder="Décrivez l'événement..." col-md="12">
+								</b:inputTextarea>
+
+								<b:formGroup style="margin-bottom:0px;">
+									<b:dateTimePicker value="#{mbCreationRencontre.dateDebut}"
+										col-md="6" show-icon="false" format="DD/MM/YYYY HH:mm"
+										locale="fr" allow-input-toggle="true"
+										placeholder="Date/Heure de début">
+									</b:dateTimePicker>
+
+									<b:dateTimePicker value="#{mbCreationRencontre.dateFin}"
+										col-md="6" show-icon="false" format="DD/MM/YYYY HH:mm"
+										locale="fr" allow-input-toggle="true"
+										placeholder="Date/Heure de fin">
+									</b:dateTimePicker>
+								</b:formGroup>
+							</b:well>
+						</b:column>
+						<b:column col-md="5">
+							<b:well col-md="12" collapsible="false"
+								style="color:gray;height:390px;">
+								<h5 style="color: gray; margin-top: 0px;">Facultatif :</h5>
+								<br />
+								<b:inputText required="false"
+									value="#{mbCreationRencontre.rencontre.nbMaxPart}"
+									placeholder="Nombre max participants" col-md="12">
+								</b:inputText>
+								<br />
+								<b:selectOneMenu colMd="12" required="false"
+									value="#{mbCreationRencontre.sexe}">
+									<f:selectItem itemLabel="Mixte" itemValue="mixte" />
+									<f:selectItem itemLabel="Homme" itemValue="homme" />
+									<f:selectItem itemLabel="Femme" itemValue="femme" />
+								</b:selectOneMenu>
+								<br />
+								<center>
+									<b:selectBooleanCheckbox
+										value="#{mbCreationRencontre.orgaParticipant}" col-md="12"
+										caption=" L'organisateur (vous) est également participant" />
+								</center>
+							</b:well>
+						</b:column>
+					</b:column>
+
+					<b:column col-md="10" offset-md="1">
+						<b:button id="goStep3" col-md="4" offset-md="8" styleClass="bouton-selection" icon-awesome="chevron-right" icon-align="right" value="Etape suivante" />
+					</b:column>
+				</b:row>
+
+			</b:container>
+			<br />
+			<!-- ************************STEP3********************************* -->
+
+			<b:container
+				style="margin-top:80px;background-color:white;border-radius:5px;padding:15px;display:none;"
+				id="step3">
+				<h3 style="margin-bottom: 20px; text-align:center;">La localisation</h3>
+				<b:row>
+					<b:column col-md="12">
+						<b:column col-md="7">
+							<b:well col-md="12">
+								<input id="pac-input" class="controls" type="text"
+									placeholder="Indiquer une ville" />
+								<div id="map"></div>
+							</b:well>
+						</b:column>
+
+						<b:column col-md="5">
+
+							<b:well col-md="12">
+						
+								<div id="resultatRechercheTerrains"
+									style="background-color: white; height: 330px; overflow-y: scroll;">
+
+								</div>
+							</b:well>
+
+						</b:column>
+					</b:column>
+					<h:inputHidden value="#{mbCreationRencontre.rencontre.nomLieu}"
+						id="inputNomLieu" />
+					<h:inputHidden value="#{mbCreationRencontre.rencontre.adresse}"
+						id="inputAdresse" />
+					<h:inputHidden value="#{mbCreationRencontre.rencontre.adresseLat}"
+						id="inputAdresseLat" />
+					<h:inputHidden value="#{mbCreationRencontre.rencontre.adresseLong}"
+						id="inputAdresseLong" />
+					<h:inputHidden value="#{mbCreationRencontre.rencontre.codePostal}"
+						id="inputCodePostal" />
+					<h:inputHidden value="#{mbCreationRencontre.rencontre.ville}"
+						id="inputVille" />
+
+					<b:column col-md="10" offset-md="1">
+						<b:button id="goStep4" col-md="4" offset-md="8" styleClass="bouton-selection" icon-awesome="chevron-right" icon-align="right" value="Etape suivante" />
+					</b:column>
+				</b:row>
+			</b:container>
+			<br />
+			<!-- ************************STEP4 invitation squad********************************* -->
+
+			<b:container
+				style="margin-top:80px;background-color:white;border-radius:5px;padding:15px;display:none;"
+				id="step4">
+				<h3 style="margin-bottom: 20px; text-align:center;">Invitation d'un groupe (optionnel)</h3>
+				<b:row>
+
+					<b:column col-md="10" offset-md="1" id="listeSquadInvitation"
+						style="height: 400px;overflow-y:scroll">
+
+						<ui:repeat var="squad"
+							value="#{mbCreationRencontre.squadsSportSelectionne}">
+							<b:column col-md="3">
+								<b:thumbnail class="thumbSquad">
+									<img src="/SQUAD/#{squad.photo}" style="width: 200px; height: 200px; background-color: gray" />
+									<f:facet name="caption">
+										<h4>#{squad.nom}</h4>
+										<b:commandButton style-class="bouton-recherche" onclick="selectSquad(this)" value="Inviter">
+
+											<f:ajax event="click"
+												listener="#{mbCreationRencontre.selectionnerSquadAInviter(squad)}" />
+
+										</b:commandButton>
+									</f:facet>
+								</b:thumbnail>
+							</b:column>
+
+
+						</ui:repeat>
+					</b:column>
+					<b:column col-md="10" offset-md="1" style="margin-top:15px;">
+						<b:commandButton id="valider" col-md="4" offset-md="8"
+							style-class="bouton-valider" action="#{mbCreationRencontre.posterRencontre()}"
+							value="Créer et partager" />
+					</b:column>
+				</b:row>
+
+			</b:container>
+			<br />
+		</h:form>
+
+		<script type="text/javascript">
+	$(function() {
+
+		$("#formCreationRencontre\\:vignetteRdv").on("click",function() {
+			$(this).css({"border": "4px solid #62d7a1"});
+			$("#formCreationRencontre\\:vignetteChampionnat").css({"border": "none"});
+		});
+
+		$("#formCreationRencontre\\:vignetteChampionnat").on("click",function() {
+			$(this).css({"border": "4px solid #62d7a1"});
+			$("#formCreationRencontre\\:vignetteRdv").css({"border":"none"});
+		});
+
+		$("#formCreationRencontre\\:goStep2").on("click",function() {
+			$("#formCreationRencontre\\:step2").show("slow");
+			$('html, body').animate({
+		        scrollTop: $("#formCreationRencontre\\:step2").offset().top
+		    }, 2000);
+			$("#un").css({color: 'dimgrey'});
+			$("#un-deux").animate({height: 'show'},1000);
+			$("#deux").animate({height: 'show'},2000);
+		});
+
+		$("#formCreationRencontre\\:goStep3").on("click",function() {
+			$("#formCreationRencontre\\:step3").show();
+
+			$('html, body').animate({
+		        scrollTop: $("#formCreationRencontre\\:step3").offset().top
+		    }, 2000);
+
+			$("#deux").css({color: 'dimgrey'});
+			$("#deux-trois").animate({height: 'show'},1000);
+			$("#trois").animate({height: 'show'},2000);
+
+			initAutocomplete();
+
+		});
+
+		$("#formCreationRencontre\\:goStep4").on("click",function() {
+			$("#formCreationRencontre\\:step4").show("slow");
+			$('html, body').animate({
+		        scrollTop: $("#formCreationRencontre\\:step4").offset().top
+		    }, 2000);
+
+			$("#trois").css({color: 'dimgrey'});
+			$("#trois-quatre").animate({height: 'show'},1000);
+			$("#quatre").animate({height: 'show'},2000);
+		});
+	});
+
+
+	function selectSquad(item) {
+
+		$(".thumbSquad").each(function() {
+
+			$(this).css({"border" : "none"});
+			
+		});
+
+		$(item).parent().parent().css({"border": "4px solid #62d7a1"});
+	}
+
+	function selectSport(item) {
+
+		sportSelected = item.innerHTML;
+
+		console.log(sportSelected);
+		
+		$("#formCreationRencontre\\:listeSports button").each(function() {
+			$(this).css({"border": "1px solid gainsboro"});
+		});
+
+		item.style.border = "3px solid #62d7a1";
+
+		return false;
+	}
+	</script>
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places"
+			async="async" defer="defer"></script>
+
+	</ui:define>
+</ui:composition>
+
+</html>
+

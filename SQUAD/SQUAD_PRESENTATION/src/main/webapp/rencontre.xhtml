@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+
+      xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Rencontre</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/rencontre.css" position="last" />
+	</ui:define>
+	<ui:define name="js">
+		<h:outputScript name="js/show-rencontre.js" position="last" />
+	</ui:define>
+	<ui:define name="content-membre">
+
+		<h:form id="formRencontre">
+			<b:container fluid="true">
+				<b:row>
+					<b:column>
+						<h2>Sélectionnez le type de rencontre</h2>
+					</b:column>
+				</b:row>
+				<b:row>
+					<b:column offset-md="4" offset-sm="3" offset-xs="2" col-md="2"
+						col-sm="3" col-xs="4">
+						<!-- 					<b:commandButton value="Rendez-vous" id="btnRDV" action="#{mbRencontre.clickBtnRdv()}"/> -->
+						<span id="btnRDV">Rendez-vous</span>
+					</b:column>
+					<b:column col-md="2" col-sm="3" col-xs="4">
+						<span id="btnEvent">événement</span>
+						<!-- 					<b:commandButton action="#{mbRencontre.clickBtnEvent()}" value="Evénement" class-style="btnRencontre" style="height: 50px"/> -->
+					</b:column>
+				</b:row>
+			</b:container>
+			<b:container fluid="true">
+				<!-- 			<h:panelGroup id="output-rdv" style="visibility:hidden" rendered="#{mbRencontre.rdvEstChoisi == 1}"> -->
+				<div id="output-rdv">
+					<!-- 				<h:panelGroup id="rdv" layout="block" rendered="#{mbRencontre.rdvEstChoisi == 1}"> -->
+					<b:row>
+						<b:column offset-md="1" col-xs="10">
+							<h2>RDV</h2>
+						</b:column>
+					</b:row>
+					<b:row>
+						<b:column offset-md="1" col-xs="10">
+							<h3>Choisissez le sport :</h3>
+						</b:column>
+					</b:row>
+					<h:inputText value="#{mbRencontre.rencontre.sport}" />
+					<h3>Indiquez l'adresse de votre rendez-vous :</h3>
+					<b:commandButton iconAwesome="fa-globe"
+						value="GoogleMaps si ça marche..." look="info" />
+					<b:inputText placeholder="Adresse"
+						value="#{mbRencontre.rencontre.adresse}" />
+
+				</div>
+				<!-- 				</h:panelGroup> -->
+				<!-- 				<h:panelGroup id="event" layout="block" rendered="#{mbRencontre.eventEstChoisi == 1}"> -->
+				<div id="output-event">
+					<h2>Evénement</h2>
+					<h3>Choisissez le sport :</h3>
+					<h:inputText value="#{mbEvenement.event.sport}" />
+					<h3>Indiquez l'adresse de votre événement :</h3>
+					<b:commandButton iconAwesome="fa-globe"
+						value="GoogleMaps si ça marche..." look="info" />
+					<b:inputText placeholder="Adresse"
+						value="#{mbEvenement.event.adresse}" />
+				</div>
+				<!-- 				</h:panelGroup> -->
+				<!-- 			</h:panelGroup>	 -->
+			</b:container>
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>
+

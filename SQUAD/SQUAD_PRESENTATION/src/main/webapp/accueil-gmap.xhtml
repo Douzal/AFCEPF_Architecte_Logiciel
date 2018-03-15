@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Rechercher un événement</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/gmap-recherche.css" position="last" />
+	</ui:define>
+	<ui:define name="js">
+		<h:outputScript library="js" name="script-gmap-recherche-rencontre.js" />
+	</ui:define>
+	<ui:define name="content-membre">
+
+		<b:container fluid="true">
+			<b:row style-class="titre-page">
+
+				<h2>Rechercher un événement</h2>
+			</b:row>
+			<b:row>
+				<h:form id="rechercheRencontre">
+					<b:column col-md="7">
+						<b:well col-md="12">
+							<b:inputText col-md="4" id="inputVille"
+								placeholder="Filtrer par ville" />
+							<b:inputText col-md="3" id="inputSport" typeahead="true"
+								typeahead-values="#{mbMembre.libelleSports}"
+								tiny-screen="full-width" value="#{mbMembre.filtreSport}"
+								placeholder="Filtre par sport" />
+							<b:dateTimePicker id="inputDate" col-md="3" show-icon="false"
+								format="DD/MM/YYYY" locale="fr" allow-input-toggle="true"
+								show-time="false" placeholder="Filtrer par date">
+							</b:dateTimePicker>
+							<b:button col-md="2" id="search" style-class="bouton-recherche" type="button"
+								value="Recherche" icon-awesome="fa-search" />
+							<div id="map"></div>
+						</b:well>
+					</b:column>
+					<b:column col-md="5">
+						<b:well col-md="12">
+							<div id="listeRencontres"
+								style="height: 450px; overflow-y: scroll;"></div>
+						</b:well>
+					</b:column>
+				</h:form>
+			</b:row>
+		</b:container>
+
+
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places&amp;callback=initAutocomplete"
+			async="async" defer="defer"></script>
+	</ui:define>
+</ui:composition>
+
+</html>
+

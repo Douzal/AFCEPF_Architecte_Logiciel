@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 janv. 2018 14:42:10 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="fr.afcepf.ai102.hibernate.entity.Toto" table="toto">
+        <id name="id" type="int">
+            <column name="id_du_toto" />
+            <generator class="identity" />
+        </id>
+        <property name="toto" type="java.lang.String">
+            <column name="la_colonne_toto" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,271 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Details championnat - #{mbDetailRencontre.rencontre.libelle}</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/detailsChampionnat.css" position="last" />
+	</ui:define>
+	<ui:define name="content-membre">
+		<b:container fluid="true">
+			<b:row styleClass="titre-page">
+				<h2>Rendez-Vous</h2>
+			</b:row>
+			<b:row>
+
+				<!-- *** PANEL DE GAUCHE RECAP INFO DEBUT *** -->
+
+				<b:panel col-md="4">
+					<b:form id="formSub" inline="true">
+						<b:row>
+							<b:panel style-class="date-recap"
+								style="height:190px;background-color:#{mbDetailRencontre.rencontre.sport.couleur}"
+								col-md="3">
+								<h:outputLabel value="#{mbDetailRencontre.rencontre.dateDebut}">
+									<f:convertDateTime locale="fr" type="date" dateStyle="medium"
+										pattern="d MMM" />
+								</h:outputLabel>
+								<h:graphicImage
+									value="#{mbDetailRencontre.rencontre.sport.icone}"
+									style="width: 30px; height: 30px;" />
+							</b:panel>
+
+
+							<b:panel col-md="9"
+								style="text-align: left; width: 100%; margin: 0px;">
+								<h3 style="margin-top: 0px;">#{mbDetailRencontre.rencontre.libelle}</h3>
+								<h:graphicImage styleClass="avatar"
+									value="#{mbDetailRencontre.rencontre.organisateur.photo}" />
+								<h:outputText
+									value="#{mbDetailRencontre.rencontre.organisateur.prenomNomTronque}"
+									style="padding-left: 10px;" />
+								<h:outputText value=" (Organisateur)" style="color: #c3c2c2;" />
+								<br />
+								<br />
+								<p>
+									<b:iconAwesome name="users" />
+									#{mbDetailRencontre.rencontre.participations.size()}
+									participants
+								</p>
+								<br />
+
+								<b:commandButton rendered="#{!mbDetailRencontre.estParticipant}"
+									col-md="12" styleClass="bouton-valider"
+									value="Rejoindre Rendez Vous"
+									action="#{mbDetailRencontre.inscriptionRencontre()}" />
+								<b:button rendered="#{mbDetailRencontre.estParticipant}"
+									col-md="12" styleClass="bouton-modif"
+									value="Quitter Rendez Vous" />
+
+							</b:panel>
+						</b:row>
+						<b:row>
+							<b:panel style="height:60px;text-align:center;color:#cecece"
+								col-md="2">
+								<b:iconAwesome name="info-circle" size="2x" />
+							</b:panel>
+
+							<b:panel col-md="10">
+								<h:outputLabel
+									value="#{mbDetailRencontre.rencontre.description}" />
+							</b:panel>
+						</b:row>
+
+						<b:row>
+							<b:panel style="height:60px;text-align:center;color:#cecece"
+								col-md="2">
+								<b:iconAwesome name="clock" size="2x" />
+							</b:panel>
+
+							<b:panel col-md="10">
+								<h:outputLabel value="#{mbDetailRencontre.rencontre.dateDebut}">
+									<f:convertDateTime locale="fr" timeStyle="short" type="date"
+										dateStyle="full" />
+								</h:outputLabel>
+								<br />
+								<h:outputLabel value="#{mbDetailRencontre.rencontre.dateDebut}">
+									<f:convertDateTime locale="fr" timeStyle="short" type="time"
+										dateStyle="full" />
+								</h:outputLabel> à 
+							<h:outputLabel value="#{mbDetailRencontre.rencontre.dateFin}">
+									<f:convertDateTime locale="fr" timeStyle="short" type="time"
+										dateStyle="full" />
+								</h:outputLabel>
+								<br />
+							</b:panel>
+						</b:row>
+
+						<b:row>
+							<b:panel style="height:60px;text-align:center;color:#cecece"
+								col-md="2">
+								<b:iconAwesome name="map-marker-alt" size="2x" />
+							</b:panel>
+
+							<b:panel col-md="10">
+								<h:outputLabel value="#{mbDetailRencontre.rencontre.nomLieu}" />
+								<br />
+								<h:outputLabel value="#{mbDetailRencontre.rencontre.adresse}" />
+								<br />
+								<h:outputLabel
+									value="#{mbDetailRencontre.rencontre.codePostal} #{mbDetailRencontre.rencontre.ville}" />
+							</b:panel>
+						</b:row>
+						<b:row>
+							<center>
+								<div style="width: 90%; height: 300px;" id="map"></div>
+								<br />
+								<b:button col-md="12" styleClass="bouton-modif" value="Modifier" />
+							</center>
+						</b:row>
+					</b:form>
+				</b:panel>
+
+				<!-- *** PANEL DE GAUCHE RECAP INFO FIN *** -->
+
+
+
+				<!-- *** PANEL DROIT TABVIEW DEBUT  *** -->
+
+				<b:panel col-md="8">
+
+					<!-- 					TAB COMMUNICATION & LISTE PARTICIPANTS -->
+					<b:tabView>
+						<b:tab title="Comunication">
+							<f:facet name="anchor">
+								<b:iconAwesome name="comments" />
+							</f:facet>
+							<b:row>
+								<h:form id="formCom">
+									<br />
+									<b:panel col-md="8">
+										<b:well col-md="12" style="height:710px;overflow-y:scroll;">
+											<ui:repeat var="m"
+												value="#{mbDetailRencontre.rencontreMessage.messages}">
+												<b:row>
+													<b:panel col-md="12" style="border:1px solid gainsboro">
+														<b:row>
+															<b:column col-md="1">
+																<h:graphicImage value="#{m.auteur.photo}"
+																	style="border-radius:50%;width:30px;height:30px"></h:graphicImage>
+															</b:column>
+															<b:column col-md="6">
+																<b:navLink value="#{m.auteur.prenomNomTronque}"
+																	href="profile.xhtml?idmembre=#{m.auteur.id}"></b:navLink>
+															</b:column>
+															<b:column col-md="4">
+																<small><i> <h:outputLabel
+																			styleClass="labelGris" value="#{m.dateMessage}">
+																			<f:convertDateTime locale="fr" timeStyle="short"
+																				type="both" dateStyle="full" timeZone="CET" />
+																		</h:outputLabel>
+																</i></small>
+															</b:column>
+															<b:column col-md="1"
+																rendered="#{mbMembre.membreConnecte.id == m.auteur.id}">
+																<b:iconAwesome name="times" />
+															</b:column>
+														</b:row>
+														<b:row>
+															<b:column col-md="10" offset="1">
+																<h:outputText value="#{m.message}" />
+															</b:column>
+
+														</b:row>
+													</b:panel>
+												</b:row>
+											</ui:repeat>
+										</b:well>
+										<b:row>
+											<b:inputText col-md="9" value="#{mbDetailRencontre.reponse}"
+												placeholder="Message..." />
+											<b:commandButton styleClass="bouton-valider" value="Envoyer"
+												col-md="3" action="#{mbDetailRencontre.ajouterMessage()}"
+												update="@form" />
+										</b:row>
+									</b:panel>
+									<b:panel col-md="4">
+										<h4 style="margin-top: 0px; margin-bottom: 10px;">Participants :</h4>
+										<b:column style="height:720px;overflow-y:scroll" col-md="12">
+											<ui:repeat var="part"
+												value="#{mbDetailRencontre.rencontre.participations}">
+												<b:navLink
+													href="profile.xhtml?idmembre=#{part.participant.id}"
+													target="_blank">
+													<b:row styleClass="row-participant">
+
+														<h:graphicImage value="#{part.participant.photo}"
+															style="border-radius:50%;width:30px;height:30px;" />
+
+														<h:outputLabel style="margin-top:5px;margin-left:5px;"
+															value="#{part.participant.prenomNomTronque}" />
+
+													</b:row>
+												</b:navLink>
+											</ui:repeat>
+										</b:column>
+									</b:panel>
+								</h:form>
+							</b:row>
+						</b:tab>
+
+						<!-- 					TAB COMMUNICATION & LISTE PARTICIPANTS ** FIN-->
+
+					</b:tabView>
+				</b:panel>
+
+				<!-- *** PANEL DROIT TABVIEW FIN  *** -->
+
+			</b:row>
+		</b:container>
+
+		<script>
+		var map;
+
+		function initAutocomplete() {
+
+			
+			var point = {lat: #{mbDetailRencontre.rencontre.adresseLat}, lng: #{mbDetailRencontre.rencontre.adresseLong}};
+			
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: point,
+				zoom: 15,
+				disableDefaultUI: true,
+				mapTypeControlOptions: {
+					mapTypeIds: []
+				},
+				styles: [{featureType: "poi",
+					elementType: "labels",
+					stylers: [{ visibility: "off" }]
+				}],
+				mapTypeId: 'roadmap'
+			});
+			
+			var marker = new google.maps.Marker({
+				position: point,
+				animation: google.maps.Animation.DROP,
+				map: map,
+			});
+
+			var options = {
+					types: ['(regions)'],
+					componentRestrictions: {country: "fr"}
+			};
+		}
+
+
+		</script>
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places&amp;callback=initAutocomplete"
+			async="async" defer="defer"></script>
+	</ui:define>
+</ui:composition>
+
+</html>
+

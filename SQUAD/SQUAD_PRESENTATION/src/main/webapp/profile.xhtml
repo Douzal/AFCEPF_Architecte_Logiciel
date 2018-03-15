@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+	xmlns:b="http://bootsfaces.net/ui" xmlns:p="http://primefaces.org/ui">
+<ui:composition template="masterpage.xhtml">
+<ui:define name="title">squad</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/profil.css" position="last" />
+	</ui:define>
+	<ui:define name="content-membre">
+		<b:row style-class="titre-page">
+			<h2>Mon compte</h2>
+		</b:row>
+		<b:container fluid="true" id="pageProfil">
+			<b:row>
+				<b:column col-md="8" offset-md="2">
+					<b:tabView>
+						<b:tab title="Informations personnelles" >
+							<b:panel style="height: 450px">
+								<b:column col-md="7">
+									<b:row>
+										<b:column col-md="3">
+											<h:graphicImage value="#{mbProfil.membreProfil.photo}" style="width: 80px; height: 80px; border-radius: 50%"/>
+										</b:column>
+										
+										<b:column col-md="9">
+											<b:row>
+												<h:outputLabel value="#{mbProfil.membreProfil.prenomNomTronque}" />	
+											</b:row>
+											
+											<b:row>
+												<span style="color: gainsboro;">#{mbProfil.membreProfil.age} ans</span>
+											</b:row>
+											<b:row>
+												<span style="color: gainsboro;">#{mbProfil.membreProfil.email}</span>
+											</b:row>
+										</b:column>
+									</b:row>
+									
+									<b:row>
+									<b:column col-md="3"></b:column>
+										<b:column col-md="9">
+											<h4>Description</h4>
+											#{mbProfil.membreProfil.description}
+										</b:column>
+									</b:row>
+								
+								</b:column>
+								<b:column col-md="5">
+									<b:button  rendered="#{mbProfil.idmembre == mbMembre.membreConnecte.id}" id="update" col-md="4" offset-md="8" styleClass="bouton-modif" value="Modifier" />
+								</b:column>
+							</b:panel>
+						</b:tab>
+						<b:tab title="Préférences sportives">
+							<b:panel style="height: 450px">
+								<ui:repeat var="sport" value="#{mbProfil.progressBar.entrySet().toArray()}">
+										<b:column col-md="2" style="margin: 20px;">
+											<b:row style="background-color:gainsboro; text-align:center; color:white">
+												<h:outputLabel value="${sport.key}"/>
+											</b:row>
+											<b:row>
+												<b:progressBar value="${sport.value}" look="primary" />
+											</b:row>
+										</b:column>
+								</ui:repeat>
+							</b:panel>
+						</b:tab>
+						<b:tab title="Groupes Squad">
+						<b:panel style="height: 450px; overflow-y: scroll;">
+							<h:form>
+							<ui:repeat var="squa" value="${mbProfil.squads}">
+								<b:commandButton col-md="4"  action="#{mbNav.afficherSquad(squa)}">
+											<b:thumbnail style="border:none;">
+												<h:graphicImage value="#{squa.photo}" styleClass="photoSquad"></h:graphicImage>
+												<f:facet name="caption">
+													<h:outputLabel  value="#{squa.nom}"/>
+													<br/>
+													<h:graphicImage value="#{squa.squadRogueLeader.photo}" styleClass="avatar-profil"></h:graphicImage> <h:outputLabel value="#{squa.squadRogueLeader.prenomNomTronque}" /> <span style="color: gainsboro;">(Animateur)</span>
+												</f:facet>
+											</b:thumbnail>
+										</b:commandButton>
+									</ui:repeat>
+								</h:form>
+							</b:panel>
+						</b:tab>
+					</b:tabView>
+				</b:column>
+			</b:row>
+			
+		</b:container>
+	</ui:define>
+</ui:composition>
+</html>

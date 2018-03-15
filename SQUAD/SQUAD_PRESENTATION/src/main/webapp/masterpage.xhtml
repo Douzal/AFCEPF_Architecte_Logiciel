@@ -1,0 +1,131 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	xmlns:b="http://bootsfaces.net/ui">
+
+
+<h:head>
+	<title><ui:insert name="title"></ui:insert></title>
+
+	<ui:insert name="meta-data"></ui:insert>
+
+	<meta name="viewport"
+		content="width=device-width, initial-scale=1.0, user-scalable=no" />
+	<meta charset="utf-8" />
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto"
+		rel="stylesheet"></link>
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Roboto+Slab"
+		rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:800" rel="stylesheet"/> 
+	<link href="https://fonts.googleapis.com/css?family=Passion+One" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet"/>
+	<link href="https://fonts.googleapis.com/css?family=Patua+One" rel="stylesheet"/> 
+	<link rel="shortcut icon" href="/SQUAD/resources/images/logo-S-_355a86-redim.ico"/>
+
+	<!-- 	<h:outputScript library="primefaces" name="jquery/jquery.js" target="head" /> -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<h:outputScript name="js/menu.js"></h:outputScript>
+	<ui:insert name="js"></ui:insert>
+
+	<h:outputStylesheet name="css/masterpage.css" position="last"></h:outputStylesheet>
+	<ui:insert name="css"></ui:insert>
+</h:head>
+<h:body>
+	<h:panelGroup layout="block" rendered="#{mbMembre.membreConnecte != null}">
+		
+		<!-- *** DEBUT NAVBAR MEMBRE *** -->
+		
+		<b:navBar brand-img="/SQUAD/resources/images/Squad-blanc.png" brand-img-style="height: 60px; margin-top: -15px !important;" brandHref="accueil-gmap.xhtml" fluid="true" styleClass="labarredenav">
+			
+			<!-- *** DEBUT ACTIONS SQUAD (GAUCHE) *** -->
+			
+			<b:navbarLinks pull="left">
+				<b:dropMenu iconAwesome="plus" value="Ajouter" icon-size="lg" style-class="lien-de-nav">
+					<b:navLink iconAwesome="map-marker-alt" value="Nouvel événement"
+						href="creation-rencontre.xhtml" />
+					<b:navLink iconAwesome="users" value="Nouveau groupe" />
+				</b:dropMenu>
+				<b:navLink iconAwesome="calendar-alt" value="Planning"
+					icon-size="lg" href="planning.xhtml" id="planning-link" />
+				<c:if test="#{mbMembre.notifications != null and mbMembre.notifications.size() > 0}">
+					<b:dropMenu iconAwesome="fa-bell" value="Notifications"
+						icon-size="lg">
+						<c:forEach var="notif" items="${mbMembre.notifications}">
+							<c:if test="${notif.estLu == false}">
+								<b:navLink href="#{notif.message}">
+									<h:outputText value="#{notif.titre}" styleClass="notif-non-lu" /></b:navLink>
+							</c:if>
+							
+							<!-- *** NOTIFS *** -->
+							
+							<c:if test="${notif.estLu == true}">
+								<b:form>
+									<b:navLink styleClass="notifs-layout">
+										<b:iconAwesome name="envelope" size="lg" />
+										<h:outputText value=" ${notif.message}" />
+									</b:navLink>
+								</b:form>
+							</c:if>
+						</c:forEach>
+					</b:dropMenu>
+				</c:if>
+				<c:if
+					test="#{mbMembre.notifications == null or mbMembre.notifications.size() == 0}">
+					<b:dropMenu iconAwesome="fa-bell" value="Notifications"
+						icon-size="lg">
+						<b:navLink disabled="true">Pas de notification</b:navLink>
+						<b:navLink value="#{mbMembre.notifications.size()}" />
+					</b:dropMenu>
+				</c:if>
+			</b:navbarLinks>
+			
+			<!-- *** FIN ACTIONS SQUAD (GAUCHE) *** -->
+			
+			<b:navbarLinks pull="right">
+				<b:navLink class="nav-compte"
+					style="color: white !important; background:none !important; cursor:default;"><span style="margin-right: 20px;">#{mbMembre.membreConnecte.prenom}</span><h:graphicImage
+						value="#{mbMembre.membreConnecte.photo}" styleClass="avatar" />
+				</b:navLink>
+				<b:navLink></b:navLink>
+				
+				<!-- *** DROPDOWN COMPTE (DROITE) *** -->
+				
+				<b:dropMenu iconAwesome="cog" value="" icon-size="lg">
+					<b:navLink iconAwesome="user" value="Mon compte" styleClass="cmdnavlink"
+						href="profile.xhtml?idmembre=#{mbMembre.membreConnecte.id}" />
+					<b:navLink />
+					<h:form id="formDropdownCompte">
+						<b:navCommandLink iconAwesome="sign-out-alt" value="Déconnexion"
+							action="#{mbSession.deconnecter()}" styleClass="cmdnavlink"
+							col-lg="12"/>
+					</h:form>
+				</b:dropMenu>
+				
+				<!-- *** FIN DROPDOWN COMPTE (DROITE) *** -->
+			</b:navbarLinks>
+		</b:navBar>
+		
+		<!-- *** FIN NAVBAR MEMBRE *** -->
+		
+		<div class="content-membre">
+			<ui:insert name="content-membre"></ui:insert>
+		</div>
+	</h:panelGroup>
+
+	<h:panelGroup layout="block" rendered="#{mbMembre.membreConnecte == null}">
+		<div class="content-visiteur">
+			<ui:insert name="content-visiteur"></ui:insert>
+		</div>
+	</h:panelGroup>
+
+	<script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+</h:body>
+</html>

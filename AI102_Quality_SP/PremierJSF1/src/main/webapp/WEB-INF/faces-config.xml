@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
+    version="2.2">
+    
+    <managed-bean>
+    	<managed-bean-name>mbPremier</managed-bean-name>
+    	<managed-bean-class>fr.afcepf.ai102.controller.PremierManagedBean</managed-bean-class>
+    	<managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+    	<managed-bean-name>mbConnexion</managed-bean-name>
+    	<managed-bean-class>fr.afcepf.ai102.controller.ConnexionManagedBean</managed-bean-class>
+    	<managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+    	<managed-bean-name>mbCommande</managed-bean-name>
+    	<managed-bean-class>fr.afcepf.ai102.controller.CommandeManagedBean</managed-bean-class>
+    	<managed-bean-scope>view</managed-bean-scope>
+    	<managed-property>
+    		<property-name>perConnected</property-name>
+    		<property-class>fr.afcepf.ai102.qualimetrie.entity.Personne</property-class>
+    		<value>#{mbConnexion.personne}</value>
+    	</managed-property>
+    </managed-bean>
+    <navigation-rule>
+    	<from-view-id>/connexion.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-action>#{mbConnexion.connexion()}</from-action>
+    		<if>#{mbConnexion.personne != null}</if>
+    		<to-view-id>/commande.xhtml</to-view-id>
+    		<redirect/>
+    	</navigation-case>
+    </navigation-rule>
+    
+    <navigation-rule>
+    	<from-view-id>/first.xhtml</from-view-id>
+    	<navigation-case>
+    		<from-action>#{mbPremier.click()}</from-action>
+    		<from-outcome>toto</from-outcome>
+    		<to-view-id>/toto.xhtml</to-view-id>
+    		<redirect/>
+    	</navigation-case>
+    	<navigation-case>
+    		<from-action>#{mbPremier.click()}</from-action>
+    		<from-outcome>tata</from-outcome>
+    		<to-view-id>/tata.xhtml</to-view-id>
+    		<redirect/>
+    	</navigation-case>
+    </navigation-rule>
+
+</faces-config>

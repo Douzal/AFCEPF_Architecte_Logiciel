@@ -1,0 +1,68 @@
+#formAccueil {
+	text-align: center;
+	background-color: white;
+	max-width: 1200px;
+	margin: auto;
+	margin-top: 40px;
+	padding: 40px 40px 0;
+	color: #3c4451;
+	min-height: 800px;
+}
+
+/***** le div autour du DateTimePicker : *****/
+
+#formAccueil #divCalendar {
+	margin: auto;
+	width: 264px;
+	_width: 500px;
+	_height: 300px;
+	text-align: center;
+	color: #3299FF;  /* current month */
+	background-color: whitesmoke;
+	padding: 10px 10px 50px 35px;
+	_padding-left: 36px;
+	margin-bottom: 40px;
+}
+/* 
+#formAccueil:btnRechercher {
+	margin-right: 60px;
+} */
+#divMap {
+	margin: auto;
+	width: 264px;
+	height: 250px;
+	background-color: whitesmoke;
+	margin-bottom: 40px;
+}
+
+/***** liste participations : ******/
+
+#formAccueil .btnDetail {
+	float: right; 
+	_margin: 10px 0 0 10px;
+	background-color: whitesmoke;
+}
+#formAccueil .btnDetail:hover {
+	 
+	background-color: #3299FF;
+	color: white;
+}
+/* ***************REPEATER :***************** */
+#formAccueil #listeRenc:hover {
+	color:red;
+}
+/* reset of applied ugliness to visited links:  */
+a:hover, a:focus {
+	text-decoration: none;
+	color: #3c4451;
+}
+.panel-heading:hover, .panel-heading a:hover {
+	background-color: #3299FF;
+	color: white;
+	text-decoration: none;
+}
+.panel-heading a:hover::after {
+	color: white;
+}
+
+

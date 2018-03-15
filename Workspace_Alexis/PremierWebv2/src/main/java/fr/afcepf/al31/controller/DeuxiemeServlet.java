@@ -1,0 +1,8 @@
+package fr.afcepf.al31.controller;
+
+import javax.servlet.http.HttpServlet;
+
+
+public class DeuxiemeServlet extends HttpServlet {
+
+}

@@ -1,0 +1,13 @@
+
+„squid:CommentedOutCodeLine "<This block of commented-out lines of code should be removed.(Ìˆï›ùÿÿÿÿ8€•éÜŸ,HÅRMAJORZ
+CODE_SMELL
+esquid:S1602$",Remove useless curly braces around statement(§ª·‡ÿÿÿÿÿ8¡×ãÜŸ,H³RMINORZ
+CODE_SMELL
+„squid:S11492"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(¡‹ùß8¿›…ÝŸ,HôRMAJORZ
+CODE_SMELL
+bsquid:S1905+")Remove this unnecessary cast to "Object".(Ï•ŸÙýÿÿÿÿ8ðºðÜŸ,HÎRMINORZ
+CODE_SMELL
+™squid:S1149"eReplace the synchronized class "Vector" by an unsynchronized one such as "ArrayList" or "LinkedList".(ÒîÛÖ8¡×ãÜŸ,H´RMAJORZ
+CODE_SMELL
+squid:CommentedOutCodeLineE"<This block of commented-out lines of code should be removed.(û¶ù8°Ð«ÝŸ,H˜RMAJORZ
+CODE_SMELL

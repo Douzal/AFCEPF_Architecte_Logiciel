@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"> 
+
+<h:head></h:head> 
+<body> 
+	<h1>Gestion Personne</h1>
+	<fieldset>
+		<legend>Afficher Personne avec une dataTable</legend>
+		<h:form>
+			<h:dataTable value="#{mbPersonne.personnes}" var="pers" 
+			border="1" cellpadding="5" cellspacing="5" >
+				<h:column>
+					<f:facet name="header">Id</f:facet>
+					<h:outputLabel value="#{pers.id}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Nom</f:facet>
+					<h:outputLabel value="#{pers.nom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Prenom</f:facet>
+					<h:outputLabel value="#{pers.prenom}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Mail:</f:facet>
+					<h:outputLabel value="#{pers.mail}" />
+				</h:column>
+				<h:column>
+					<f:facet name="header">Date de Naissance</f:facet>
+					<h:outputLabel value="#{pers.dob}" />
+				</h:column>		
+			</h:dataTable>
+			<fieldset>
+				<legend>La même chose avec un ui:repeat</legend>
+				<ul>
+					<ui:repeat var="pers" value="#{mbPersonne.personnes}" varStatus="status">
+					
+						<li>#{pers.prenom} #{pers.nom} 
+						<h:commandButton action="#{mbPersonne.delete(status.index)}" value="X" />
+						<h:selectBooleanCheckbox value="#{mbPersonne.selected[status.index]}" />
+						</li>
+					
+					</ui:repeat>
+					<h:commandButton action="#{mbPersonne.deletePersonnes()}" value="supprimer" />
+				</ul>
+			</fieldset>
+		
+		</h:form>
+	
+	</fieldset>
+
+</body> 
+</html>

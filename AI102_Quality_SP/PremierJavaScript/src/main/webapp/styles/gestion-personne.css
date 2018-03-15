@@ -1,0 +1,78 @@
+.boite-personne {
+	width: 150px;
+	height: 200px;
+	float: left;
+	border: 1px solid gray;
+	margin: 5px;
+}
+.boite-personne-contenu {
+	height: 150px;
+}
+.boite-personne-footer input[type='button'] {
+	width: 150px;
+}  
+.boite-personne-titre {
+	text-align: center;
+	border-bottom: 1px solid gray;
+}
+.form-ajout {
+	width:510px;
+	margin:auto;
+}
+.form-ajout .label{
+	clear:left;
+	width:150px;
+	height: 30px;
+	float: left;
+}
+.form-ajout .input{
+	width:350px;
+	height: 30px;
+	float: left;
+}
+.form-ajout .input input[type='text'],
+.form-ajout .input input[type='password']{
+	width:350px;
+	height: 25px;
+}
+.form-ajout .button {
+	clear:both;	
+	width: 500px;
+	height: 50px;
+	padding-top: 10px;
+}
+.form-ajout .button input[type='submit'] {
+	width: 500px;
+	height: 50px; 
+}
+.form-gestion {
+	width:98%;
+	display: table;
+}
+.form-gestion #tab-personne{
+	width:70%;
+	float: left;
+}
+.form-gestion .corbeille{
+	width:25%;
+	float:right;
+	min-height: 250px;
+	background-image: url("../images/corbeille.png");
+	background-repeat: no-repeat;
+}
+.pleine{
+	width:25%;
+	float:right;
+	min-height: 250px;
+	background-image: url("../images/pleine.jpg");
+	background-repeat: no-repeat;
+}
+#message{
+	height: 50px;
+	color:white;
+	font-weight:bold;
+	font-variant: small-caps;
+	font-weight: bold;
+	background-color: green;
+	font-size: 35px;
+}

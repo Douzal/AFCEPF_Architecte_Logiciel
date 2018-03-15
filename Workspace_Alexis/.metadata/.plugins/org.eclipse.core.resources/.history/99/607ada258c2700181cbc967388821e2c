@@ -1,0 +1,7 @@
+package fr.afcepf.al31.controller;
+
+import javax.servlet.http.HttpServletF;
+
+public class PremierForm extends HttpServletF {
+
+}

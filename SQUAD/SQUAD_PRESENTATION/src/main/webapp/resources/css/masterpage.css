@@ -1,0 +1,323 @@
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+body {
+	background-color: whitesmoke;
+	font-family: Roboto, 'Open Sans', serif;
+}
+
+h2 {
+	color: dimgrey !important;
+	font-family: Roboto, serif !important;
+	font-size: 3em;
+	width: 100%;
+	font-variant: small-caps;
+}
+
+h3 {
+	font-family: Roboto, serif !important;
+	font-size: 24px;
+	color: rgb(53, 90, 134,1) !important;
+	font-weight: bolder;
+}
+
+h4 {
+	font-family: Roboto, serif !important;
+	font-size: 18px;
+	color: rgb(53, 90, 134,1) !important;
+}
+
+a {
+	color: #3299FF !important;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.panel, .well {
+	border: none;
+	background-color: white;
+	box-shadow: none !important;
+}
+
+.labarredenav {
+	background-color: rgb(53, 90, 134,1);
+	color: white !important;
+	border: none !important;
+	padding-bottom: 10px;
+}
+
+.primaire {
+	background-color: #3299FF;
+}
+
+.logo-squad {
+
+}
+
+.navbar-default .navbar-brand {
+
+}
+
+/* BIEN DEGUEULASSE */
+
+/* /* Normal 
+.navbar-default .navbar-nav>li>a, .navbar-default .navbar-nav>li>a:not(.nav-compte), .navbar-default .navbar-brand {
+	position: relative;
+	color: white !important;
+	text-decoration: none;
+	margin-top: 10px !important;
+}
+
+Before
+.navbar-default .navbar-nav > li > a:before, .navbar-default .navbar-nav>li>a:not(.nav-compte):before, .navbar-default .navbar-nav > li > a:before
+{
+	content: "" !important;
+	position: absolute !important;
+	width: 100% !important;
+	height: 2px !important;
+	bottom: 0 !important;
+	left: 0 !important;
+	background-color: gainsboro !important;
+	visibility: hidden !important;
+	-webkit-transform: scaleX(0) !important;
+	transform: scaleX(0) !important;
+	-webkit-transition: all 0.3s ease-in-out 0s !important;
+	transition: all 0.3s ease-in-out 0s !important;
+}
+
+Hover
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav>li>a:not(.nav-compte):hover, .navbar-default .navbar-nav > li > a:focus
+{
+	color: gainsboro !important;
+	background:none;
+}
+
+Hover before
+.navbar-default .navbar-nav > li > a:hover:before, .navbar-default .navbar-nav>li>a:not(.nav-compte):hover:before, .navbar-default .navbar-nav > li > a:focus {
+	visibility: visible !important;
+	-webkit-transform: scaleX(1) !important;
+	transform: scaleX(1) !important;
+}
+
+.labarredenav:nth-child(4):before {
+	transition: none !important;
+	background-color: red !important;
+} */
+
+/*BEFORE 2*/
+
+.navbar-default .navbar-brand:not(.nav-compte):before, .navbar-default .navbar-nav>li:not(.nav-compte)>a:before{
+	content: "" !important;
+	position: absolute !important;
+	width: 100% !important;
+	height: 2px !important;
+	bottom: 0 !important;
+	left: 0 !important;
+	background-color: gainsboro !important;
+	visibility: hidden !important;
+	-webkit-transform: scaleX(0) !important;
+	transform: scaleX(0) !important;
+	-webkit-transition: all 0.3s ease-in-out 0s !important;
+	transition: all 0.3s ease-in-out 0s !important;
+}
+
+/*NORMAL V2*/
+
+.navbar-default .navbar-nav>li:not(.nav-compte)>a{
+	position: relative;
+	color: white !important;
+	text-decoration: none;
+	margin-top: 6px;
+
+}
+/*HOVER 2*/
+.navbar-default .navbar-brand:not(.nav-compte):focus, .navbar-default .navbar-nav>li:not(.nav-compte)>a:hover, .navbar-default .navbar-nav>li:not(.nav-compte)>a:focus {
+	color: gainsboro !important;
+	background:none;
+}
+/*HOVER BEFORE 2*/
+
+.navbar-default .navbar-nav>li:not(.nav-compte)>a:hover:before {
+	visibility: visible !important;
+	-webkit-transform: scaleX(1) !important;
+	transform: scaleX(1) !important;
+}
+
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	background: none;
+}
+
+.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover,
+	.navbar-default .navbar-nav>.open>a:focus {
+	color: white !important;
+}
+
+.dropdown-menu > li > a, .commandLink {
+    display: block;
+    padding: 3px 20px;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: dimgrey;
+    white-space: nowrap;
+    text-align: center;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus, .commandLink:hover {
+	background-color: #3299FF;
+	color: white !important;
+	width: 100%;
+	text-decoration: none;
+}
+
+.avatar {
+	width: 30px !important;
+	height: 30px !important;
+	border-radius: 50% !important;
+}
+
+.notif-lu {
+	
+}
+
+.notif-non-lu {
+	background-color: orange;
+	color: white;
+	border-radius: 5px;
+}
+
+.cmdnavlink {
+	text-align: right;
+	margin: 0;
+	display: block;
+    clear: both;
+    font-weight: normal;
+    line-height: 1.428571429;
+    color: dimgrey;
+    white-space: nowrap;
+}
+
+.cmdnavlink:hover {
+	background: none;
+	background-color: #2FA4E7;
+	color: white;
+}
+
+.titre-page {
+	padding-bottom: 30px;
+	margin-bottom: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	text-align: center;
+	border-bottom: 1px solid gainsboro;
+	
+}
+
+.content-visiteur {
+
+}
+
+.separateur-y {
+	height: 1px !important;
+	background-color: gainsboro;
+	margin: 20px;
+}
+
+.bouton-cool {
+	border: none;
+	width:100%;
+	font-size: 1.2em;
+	margin-top: 10px;
+	color: white;
+	border-radius: 50px;
+	transition: 0.5;
+}
+
+.bouton-recherche {
+	border: none;
+	width:100%;
+	border-radius: 50px;
+	color: white;
+	background-color: #3299FF;
+}
+
+.bouton-recherche:hover {
+	color: white;
+	background-color: #297cce;
+	box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.75);
+}
+
+.defautRencontre {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  	transition: box-shadow 0.7s ease-in-out;
+}
+
+.defautRencontre:hover {
+	  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.date-recap {
+	color: white !important;
+	text-transform: capitalize;
+	font-weight: bold;
+	font-size: 1.3em;
+	text-align: center;
+}
+
+.bouton-selection {
+	border: none;
+	width:100%;
+	border-radius: 50px;
+	color: dimgrey;
+	background-color: whitesmoke;
+}
+
+.bouton-selection:hover {
+	background-color: gainsboro;
+}
+
+
+.bouton-valider {
+	border: none;
+	width:100%;
+	border-radius: 50px;
+	color: white;
+	background-color: #62d7a1;
+}
+
+.bouton-valider:hover {
+	background-color: #4cba71;
+	color: white;
+	box-shadow: 2px 2px 4px 0px rgba(0,0,0,0.75);
+}
+
+.vignette-event {
+	box-sizing: border-box !important;
+	-moz-box-sizing: border-box !important;
+	-webkit-box-sizing: border-box !important;
+	border: 1px solid gainsboro !important;
+}
+
+.bouton-select-sport:hover, .bouton-select-sport:active, .bouton-select-sport:focus {
+	background-color: white !important;
+}
+
+.bouton-modif {
+	border: none;
+	width:100%;
+	border-radius: 50px;
+	color: white;
+	background-color: #ff6e5b;
+
+}
+
+.bouton-modif:hover {
+	background-color: #dd4e3b;
+	color: white;
+}
+

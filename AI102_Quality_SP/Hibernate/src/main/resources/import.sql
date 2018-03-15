@@ -1,0 +1,12 @@
+INSERT INTO ville (id, libelle) VALUES (1, 'PARIS');
+INSERT INTO ville (id, libelle) VALUES (2, 'LYON');
+INSERT INTO ville (id, libelle) VALUES(3, 'MONTROUGE');
+INSERT INTO cp (id, libelle) VALUES (1, '75005');
+INSERT INTO cp (id, libelle) VALUES (2, '69003');
+INSERT INTO cp (id, libelle) VALUES (3, '92120');
+INSERT INTO adresse (id, num, rue, id_ville, id_cp) VALUES(1, '102', 'micile fixe', 1, 1);
+INSERT INTO adresse (id, num, rue, id_ville, id_cp) VALUES(2, '102', 'micile fixe', 2, 2);	
+INSERT INTO personne (id, nom, prenom, mail, password, naissance, id_adresse) VALUES (1, 'pers1', 'pers1', 'pers1@app.fr', 'pers1', '2012-12-21', 1);
+INSERT INTO personne (id, nom, prenom, mail, password, naissance, id_adresse) VALUES (2, 'pers2', 'pers2', 'pers2@app.fr', 'pers2', '2012-12-21', 2);
+INSERT INTO personne (id, nom, prenom, mail, password, naissance, id_adresse) VALUES (3, 'pers3', 'pers3', 'pers3@app.fr', 'pers3', '2012-12-21', 2);
+INSERT INTO toto VALUES (null, 'totototototo');

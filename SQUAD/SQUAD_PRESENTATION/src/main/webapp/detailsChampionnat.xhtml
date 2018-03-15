@@ -1,0 +1,527 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:b="http://bootsfaces.net/ui">
+
+
+<ui:composition template="masterpage.xhtml">
+	<ui:define name="title">Details championnat - #{mbDetailsChampionnat.evenement.libelle}</ui:define>
+	<ui:define name="css">
+		<h:outputStylesheet name="css/detailsChampionnat.css" position="last" />
+	</ui:define>
+	<ui:define name="content-membre">
+		<b:container fluid="true">
+			<b:row styleClass="titre-page">
+				<h2>
+					Championnat
+					<b:commandLink
+						rendered="#{mbDetailsChampionnat.evenement.squad != null}"
+						href="/detailsSquad.xhtml?idsquad=#{mbDetailsChampionnat.evenement.squad.id}">
+
+						<h:graphicImage
+							value="#{mbDetailsChampionnat.evenement.squad.photo}" />
+						
+						#{mbDetailsChampionnat.evenement.squad.nom}
+						
+						</b:commandLink>
+				</h2>
+			</b:row>
+			<b:row>
+
+				<!-- *** PANEL DE GAUCHE RECAP INFO DEBUT *** -->
+
+				<b:panel col-md="4">
+					<b:form id="formSub" inline="true">
+						<b:row>
+							<b:panel style-class="date-recap"
+								style="height:190px;background-color:#{mbDetailsChampionnat.evenement.sport.couleur}"
+								col-md="3">
+								<h:outputLabel
+									value="#{mbDetailsChampionnat.evenement.dateDebut}">
+									<f:convertDateTime locale="fr" type="date" dateStyle="medium"
+										pattern="d MMM" />
+								</h:outputLabel>
+								<h:graphicImage
+									value="#{mbDetailsChampionnat.evenement.sport.icone}"
+									style="width: 30px; height: 30px;" />
+							</b:panel>
+
+
+							<b:panel col-md="9"
+								style="text-align: left; width: 100%; margin: 0px;">
+								<h3 style="margin-top: 0px;">#{mbDetailsChampionnat.evenement.libelle}</h3>
+								<h:graphicImage styleClass="avatar"
+									value="#{mbDetailsChampionnat.evenement.organisateur.photo}" />
+								<h:outputText
+									value="#{mbDetailsChampionnat.evenement.organisateur.prenomNomTronque}"
+									style="padding-left: 10px;" />
+								<h:outputText value=" (Organisateur)" style="color: #c3c2c2;" />
+								<br />
+								<br />
+								<p>
+									<b:iconAwesome name="users" />
+									#{mbDetailsChampionnat.evenement.participations.size()}
+									participants
+								</p>
+								<br />
+
+								<b:commandButton
+									rendered="#{!mbDetailsChampionnat.estParticipant}" col-md="12"
+									styleClass="bouton-valider" value="Rejoindre Championnat"
+									action="#{mbDetailsChampionnat.participer()}" />
+								<b:commandButton
+									rendered="#{mbDetailsChampionnat.estParticipant}" col-md="12"
+									styleClass="bouton-modif" value="Quitter Championnat"
+									action="#{mbDetailsChampionnat.retirerParticipation()}" />
+
+							</b:panel>
+						</b:row>
+						<b:row>
+							<b:panel style="height:60px;text-align:center;color:#cecece"
+								col-md="2">
+								<b:iconAwesome name="info-circle" size="2x" />
+							</b:panel>
+
+							<b:panel col-md="10">
+								<h:outputLabel
+									value="#{mbDetailsChampionnat.evenement.description}" />
+							</b:panel>
+						</b:row>
+
+						<b:row>
+							<b:panel style="height:60px;text-align:center;color:#cecece"
+								col-md="2">
+								<b:iconAwesome name="clock" size="2x" />
+							</b:panel>
+
+							<b:panel col-md="10">
+								<h:outputLabel
+									value="#{mbDetailsChampionnat.evenement.dateDebut}">
+									<f:convertDateTime locale="fr" timeStyle="short" type="date"
+										dateStyle="full" />
+								</h:outputLabel>
+								<br />
+								<h:outputLabel
+									value="#{mbDetailsChampionnat.evenement.dateDebut}">
+									<f:convertDateTime locale="fr" timeStyle="short" type="time"
+										dateStyle="full" />
+								</h:outputLabel> à 
+							<h:outputLabel value="#{mbDetailsChampionnat.evenement.dateFin}">
+									<f:convertDateTime locale="fr" timeStyle="short" type="time"
+										dateStyle="full" />
+								</h:outputLabel>
+								<br />
+							</b:panel>
+						</b:row>
+
+						<b:row>
+							<b:panel style="height:60px;text-align:center;color:#cecece"
+								col-md="2">
+								<b:iconAwesome name="map-marker-alt" size="2x" />
+							</b:panel>
+
+							<b:panel col-md="10">
+								<h:outputLabel value="#{mbDetailsChampionnat.evenement.nomLieu}" />
+								<br />
+								<h:outputLabel value="#{mbDetailsChampionnat.evenement.adresse}" />
+								<br />
+								<h:outputLabel
+									value="#{mbDetailsChampionnat.evenement.codePostal} #{mbDetailsChampionnat.evenement.ville}" />
+							</b:panel>
+						</b:row>
+						<b:row>
+							<center>
+								<div style="width: 90%; height: 300px;" id="map"></div>
+								<br />
+								<b:button col-md="12" rendered="#{mbDetailsChampionnat.estOrga}"
+									styleClass="bouton-modif" value="Modifier" />
+							</center>
+						</b:row>
+					</b:form>
+				</b:panel>
+
+				<!-- *** PANEL DE GAUCHE RECAP INFO FIN *** -->
+
+
+
+				<!-- *** PANEL DROIT TABVIEW DEBUT  *** -->
+
+				<b:panel col-md="8">
+
+					<!-- 					TAB COMMUNICATION & LISTE PARTICIPANTS -->
+					<b:tabView>
+						<b:tab title="Comunication">
+							<f:facet name="anchor">
+								<b:iconAwesome name="comments" />
+							</f:facet>
+							<b:row>
+								<h:form id="formCom">
+									<br />
+									<b:panel col-md="8">
+										<b:well col-md="12" style="height:710px;overflow-y:scroll">
+											<ui:repeat var="m"
+												value="#{mbDetailsChampionnat.evenement.messages}">
+												<b:row>
+													<b:panel col-md="12" style="border:1px solid gainsboro">
+														<b:row>
+															<b:column col-md="1">
+																<h:graphicImage value="#{m.auteur.photo}"
+																	style="border-radius:50%;width:30px;height:30px"></h:graphicImage>
+															</b:column>
+															<b:column col-md="6">
+																<b:navLink value="#{m.auteur.prenomNomTronque}"
+																	href="profile.xhtml?idmembre=#{m.auteur.id}"></b:navLink>
+															</b:column>
+															<b:column col-md="4">
+																<small><i> <h:outputLabel
+																			styleClass="labelGris" value="#{m.dateMessage}">
+																			<f:convertDateTime locale="fr" timeStyle="short"
+																				type="both" dateStyle="full" timeZone="CET" />
+																		</h:outputLabel>
+																</i></small>
+															</b:column>
+
+														</b:row>
+														<b:row>
+															<b:column col-md="10" offset="1">
+																<h:outputText value="#{m.message}" />
+															</b:column>
+
+														</b:row>
+													</b:panel>
+												</b:row>
+											</ui:repeat>
+										</b:well>
+										<b:row>
+											<b:inputText col-md="9"
+												value="#{mbDetailsChampionnat.message}"
+												placeholder="Message..." />
+											<b:commandButton styleClass="bouton-valider" value="Envoyer"
+												col-md="3" action="#{mbDetailsChampionnat.saveMessage()}"
+												update="@form" />
+										</b:row>
+									</b:panel>
+									<b:panel col-md="4">
+										<h4 style="margin-top: 0px; margin-bottom: 10px;">Les
+											Participants :</h4>
+										<b:column style="height:720px;overflow-y:scroll" col-md="12">
+											<ui:repeat var="part"
+												value="#{mbDetailsChampionnat.evenement.participations}">
+												<b:navLink
+													href="profile.xhtml?idmembre=#{part.participant.id}"
+													target="_blank">
+													<b:row styleClass="row-participant">
+
+														<h:graphicImage value="#{part.participant.photo}"
+															style="border-radius:50%;width:30px;height:30px;" />
+
+														<h:outputLabel style="margin-top:5px;margin-left:5px;"
+															value="#{part.participant.prenomNomTronque}" />
+														<b:commandButton size="xs"
+															style="margin-left:15px;margin-top:5px;float:right"
+															rendered="#{mbDetailsChampionnat.estOrga and mbDetailsChampionnat.evenement.confrontations.size() eq 0}"
+															action="#{mbDetailsChampionnat.retirerParticipant(part)}"
+															value="X" look="danger"
+															update="@form @root:**:formEquipe">
+														</b:commandButton>
+													</b:row>
+												</b:navLink>
+											</ui:repeat>
+										</b:column>
+									</b:panel>
+								</h:form>
+							</b:row>
+						</b:tab>
+
+						<!-- 					TAB COMMUNICATION & LISTE PARTICIPANTS ** FIN-->
+
+
+
+
+
+						<!-- 					TAB EQUIPE DEB -->
+						<b:tab title="Equipes">
+							<f:facet name="anchor">
+								<b:iconAwesome name="users" />
+							</f:facet>
+							<h:form id="formEquipe">
+								<b:row
+									rendered="#{mbDetailsChampionnat.evenement.confrontations.size() == 0 and mbDetailsChampionnat.estOrga}">
+									<br />
+									<b:inputText col-md="4"
+										value="#{mbDetailsChampionnat.inputEquipe}" />
+									<b:commandButton col-md="3" styleClass="bouton-valider"
+										value="Ajouter équipe"
+										action="#{mbDetailsChampionnat.ajouterEquipe()}"
+										update="@form" />
+
+									<b:commandButton
+										rendered="#{mbDetailsChampionnat.membreSansEquipe().size() > 0}"
+										col-md="4" offset-md="1" styleClass="bouton-valider"
+										value="Placer participants"
+										action="#{mbDetailsChampionnat.placerAutomatiquementParticipantsSansEq()}"
+										update="@form" />
+
+									<b:commandButton
+										rendered="#{mbDetailsChampionnat.membreSansEquipe().size() == 0}"
+										disabled="#{mbDetailsChampionnat.evenement.confrontations.size() gt 0 or mbDetailsChampionnat.evenement.equipes.size() lt 2}"
+										col-md="4" offset-md="1" styleClass="bouton-modif"
+										value="Générer confrontations"
+										action="#{mbDetailsChampionnat.genererConfrontation()}" />
+									<hr
+										style="border-top: 1px solid #c9cacc; margin-top: 10px; margin-bottom: 0px;" />
+								</b:row>
+								<b:row id="listeEquipes">
+									<b:panel col-md="8"
+										style="margin-top:15px;height:700px;overflow-y:scroll;">
+										<ui:repeat var="equipe"
+											value="#{mbDetailsChampionnat.evenement.equipes}">
+											<b:column col-md="6">
+												<b:panel col-md="12" style="min-height:250px;"
+													look="primary" collapsible="false">
+													<f:facet name="heading">
+														<h:outputText value="#{equipe.nom}" />
+														<b:commandButton value="Supprimer" size="xs" look="danger"
+															style="color:white;float:right;margin-left:5px;"
+															rendered="#{mbDetailsChampionnat.evenement.confrontations.size() == 0}"
+															iconAwesome="trash-alt"
+															action="#{mbDetailsChampionnat.supprimerEquipe(equipe)}"
+															update="@form">
+														</b:commandButton>
+														<b:commandButton
+															rendered="#{mbDetailsChampionnat.estSansEquipe and mbDetailsChampionnat.evenement.confrontations.size() == 0}"
+															value="Rejoindre" size="xs" look="success"
+															style="color:white;float:right;margin-left:5px;"
+															iconAwesome="plus-square"
+															action="#{mbDetailsChampionnat.rejoindreEquipe(equipe)}"
+															update="@form">
+														</b:commandButton>
+													</f:facet>
+													<b:row id="listeMb">
+														<ui:repeat var="mbequipe" value="#{equipe.participants}">
+															<b:column col-md="12">
+																<b:row styleClass="row-participant-eq">
+
+																	<h:graphicImage value="#{mbequipe.photo}"
+																		style="border-radius:50%;width:30px;height:30px;" />
+
+																	<h:outputLabel style="margin-top:5px;margin-left:5px;"
+																		value="#{mbequipe.prenomNomTronque}" />
+
+																	<b:commandButton size="xs" style="margin-left:15px;"
+																		rendered="#{mbDetailsChampionnat.membreConnecte.id == mbequipe.id and mbDetailsChampionnat.evenement.confrontations.size() == 0}"
+																		update="@form"
+																		action="#{mbDetailsChampionnat.quitterEquipe(equipe,mbequipe)}"
+																		value="Quitter" look="danger" />
+																</b:row>
+															</b:column>
+														</ui:repeat>
+													</b:row>
+												</b:panel>
+											</b:column>
+										</ui:repeat>
+									</b:panel>
+									<b:panel col-md="4"
+										style="margin-top:15px;height:700px;overflow-y:scroll;">
+
+										<h4>Participant(s) sans équipe :</h4>
+
+										<ui:repeat var="membre"
+											value="#{mbDetailsChampionnat.membreSansEquipe()}">
+											<b:column col-md="12">
+												<b:row styleClass="row-participant-eq">
+
+													<h:graphicImage value="#{membre.photo}"
+														style="border-radius:50%;width:30px;height:30px;" />
+
+													<h:outputLabel style="margin-top:5px;margin-left:5px;"
+														value="#{membre.prenomNomTronque}" />
+												</b:row>
+											</b:column>
+										</ui:repeat>
+
+
+									</b:panel>
+
+								</b:row>
+							</h:form>
+						</b:tab>
+
+						<!-- 					TAB EQUIPE FIN -->
+
+
+
+						<!-- 					TAB EQUIPE RESULTATS CONFRONTATIONS DEB -->
+
+
+						<b:tab title="Confrontations / Résultats"
+							disabled="#{mbDetailsChampionnat.evenement.confrontations.size() == 0}">
+							<f:facet name="anchor">
+								<b:iconAwesome name="sitemap" />
+							</f:facet>
+							<h:form id="formResultats">
+								<b:row>
+									<br />
+									<b:column col-md="8">
+										<b:well col-md="12" style="height:734px;overflow-y:scroll">
+
+											<ui:repeat var="round"
+												value="#{mbDetailsChampionnat.confrontationParRound()}"
+												varStatus="item">
+												<b:column
+													style="background-color:#e5e5e5;padding:10px;margin-bottom:15px;"
+													col-md="12">
+													<h:outputLabel value="Round #{item.index + 1}" />
+													<hr
+														style="margin-bottom: 10px; margin-top: 0px; border-top: 1px solid #d1d2d3" />
+													<ui:repeat var="confrontation" value="#{round}">
+														<b:column col-md="6">
+															<b:commandButton col-md="12" style="margin-bottom:10px;"
+																action="#{mbDetailsChampionnat.confrontationPourRes(confrontation)}"
+																oncomplete="$('.modalPseudoClass').modal()"
+																update="@form">
+																<b:row>
+																	<b:column col-md="12">
+
+																		<b:column col-md="12">
+																			<b:column
+																				style="height:20px;background-color:#4286f4;color:white"
+																				col-md="9">
+
+																				<h:outputLabel
+																					value="#{confrontation.resultats.get(0).equipe.nom}" />
+																			</b:column>
+																			<b:column col-md="3"
+																				style="height:20px;background-color:#c2c3c4;">
+																				<h:outputLabel
+																					value="#{confrontation.resultats.get(0).score}" />
+																			</b:column>
+																		</b:column>
+																		<b:column style="text-align:center;">
+																			<i>VS</i>
+																		</b:column>
+																		<b:column col-md="12">
+																			<b:column
+																				style="height:20px;background-color:#4286f4;color:white"
+																				col-md="9">
+
+																				<h:outputLabel
+																					value="#{confrontation.resultats.get(1).equipe.nom}" />
+																			</b:column>
+																			<b:column col-md="3"
+																				style="height:20px;background-color:#c2c3c4;">
+																				<h:outputLabel
+																					value=" #{confrontation.resultats.get(1).score}" />
+																			</b:column>
+																		</b:column>
+																	</b:column>
+																</b:row>
+															</b:commandButton>
+														</b:column>
+													</ui:repeat>
+												</b:column>
+											</ui:repeat>
+
+										</b:well>
+									</b:column>
+									<b:column col-md="4" style="height:730px;overflow:auto">
+										<b:dataTable searching="false" info="false" paginated="false"
+											value="#{mbDetailsChampionnat.fromTheBottomToTheTop().entrySet().toArray()}"
+											var="res">
+											<b:dataTableColumn>
+												<f:facet name="header">Equipe</f:facet>
+														#{res.key}
+														</b:dataTableColumn>
+											<b:dataTableColumn order="desc">
+												<f:facet name="header">Points</f:facet>
+														#{res.value}
+													</b:dataTableColumn>
+										</b:dataTable>
+									</b:column>
+								</b:row>
+								<b:modal id="posterResultats" title="Poster résultats :"
+									styleClass="modalPseudoClass">
+
+									<b:inputText required="true" placeholder="score"
+										value="#{mbDetailsChampionnat.confrontationSelectionnee.resultats.get(0).score}"
+										label="Score #{mbDetailsChampionnat.confrontationSelectionnee.resultats.get(0).equipe.nom}"
+										colMd="6" labelColMd="4" />
+
+									<b:inputText required="true" placeholder="score"
+										value="#{mbDetailsChampionnat.confrontationSelectionnee.resultats.get(1).score}"
+										label="Score #{mbDetailsChampionnat.confrontationSelectionnee.resultats.get(1).equipe.nom}"
+										colMd="6" labelColMd="4" />
+
+
+									<b:row>
+										<b:column col-md="12">
+											<b:button id="closeModal" value="Fermer" dismiss="modal"
+												col-md="6" look="danger" />
+
+											<b:commandButton value="Valider"
+												oncomplete="$('.modal-backdrop').hide();"
+												action="#{mbDetailsChampionnat.updateScore()}"
+												update="@form" col-md="6" look="primary" />
+										</b:column>
+									</b:row>
+								</b:modal>
+							</h:form>
+						</b:tab>
+
+						<!-- 					TAB EQUIPE RESULTATS CONFRONTATIONS FIN -->
+					</b:tabView>
+				</b:panel>
+
+				<!-- *** PANEL DROIT TABVIEW FIN  *** -->
+
+			</b:row>
+		</b:container>
+
+		<script>
+		var map;
+
+		function initAutocomplete() {
+
+			
+			var point = {lat: #{mbDetailsChampionnat.evenement.adresseLat}, lng: #{mbDetailsChampionnat.evenement.adresseLong}};
+			
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: point,
+				zoom: 15,
+				disableDefaultUI: true,
+				mapTypeControlOptions: {
+					mapTypeIds: []
+				},
+				styles: [{featureType: "poi",
+					elementType: "labels",
+					stylers: [{ visibility: "off" }]
+				}],
+				mapTypeId: 'roadmap'
+			});
+			
+			var marker = new google.maps.Marker({
+				position: point,
+				animation: google.maps.Animation.DROP,
+				map: map,
+			});
+
+			var options = {
+					types: ['(regions)'],
+					componentRestrictions: {country: "fr"}
+			};
+		}
+
+
+		</script>
+
+		<script
+			src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB3sXc1jll4nSshdpbdz3rsipVEIJTgbRs&amp;libraries=places&amp;callback=initAutocomplete"
+			async="async" defer="defer"></script>
+	</ui:define>
+</ui:composition>
+
+</html>
+

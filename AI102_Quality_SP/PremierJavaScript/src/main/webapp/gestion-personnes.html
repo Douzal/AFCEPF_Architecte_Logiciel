@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Gestion Personne JQUERY - AJAX - AI102 - RIA</title>
+<!-- LOCAL -->
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery-ui.min.js">
+</script>
+<link href="styles/gestion-personne.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="js/gestion-personnes.js">
+</script>
+</head>
+<body>
+	<fieldset class="form-ajout">
+		<legend>ajout de personne</legend>
+		<form name="form-ajout" id="form-ajout">
+			<div class="label">nom : </div>
+			<div class="input">
+			<input type="text" name="personne-nom" id="personne-nom" />
+			</div>
+			<div class="label">prénom : </div>
+			<div class="input">
+			<input type="text" name="personne-prenom" id="personne-prenom" />
+			</div>
+			<div class="label">mail : </div>
+			<div class="input">
+			<input type="text" name="personne-mail" id="personne-mail" />
+			</div>
+			<div class="label">password : </div>
+			<div class="input">
+			<input type="password" name="personne-password" id="personne-password" />
+			</div>
+			<div class="label">naissance : </div>
+			<div class="input">
+			<input type="text" name="personne-naissance" id="personne-naissance" />
+			</div>
+			<div class="button">
+				<input type="submit" value="Ajouter" id="btn-ajouter" />
+			</div>
+		</form>
+	</fieldset>
+	<div id="message"></div>
+	<fieldset class="form-gestion">
+		<legend>gestion de personne</legend>
+		<div id="tab-personne"></div>
+		<div class="corbeille"></div>
+	</fieldset>
+</body>
+</html>

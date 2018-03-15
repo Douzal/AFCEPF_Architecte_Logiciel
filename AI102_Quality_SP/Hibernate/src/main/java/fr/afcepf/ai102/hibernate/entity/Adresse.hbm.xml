@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 26 janv. 2018 14:42:10 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="fr.afcepf.ai102.hibernate.entity.Adresse" table="ADRESSE">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="num" type="java.lang.String">
+            <column name="NUM" />
+        </property>
+        <property name="rue" type="java.lang.String">
+            <column name="RUE" />
+        </property>
+        <many-to-one name="ville" class="fr.afcepf.ai102.hibernate.entity.Ville" fetch="join">
+            <column name="VILLE" />
+        </many-to-one>
+        <many-to-one name="cp" class="fr.afcepf.ai102.hibernate.entity.CP" fetch="join">
+            <column name="CP" />
+        </many-to-one>
+        <set name="personnes" table="PERSONNE" inverse="false" lazy="true">
+            <key>
+                <column name="ID" />
+            </key>
+            <one-to-many class="fr.afcepf.ai102.hibernate.entity.Personne" />
+        </set>
+    </class>
+</hibernate-mapping>

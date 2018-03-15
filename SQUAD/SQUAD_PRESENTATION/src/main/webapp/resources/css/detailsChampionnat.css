@@ -1,0 +1,15 @@
+
+.row-participant {
+	border-radius:5px;
+	border:1px solid gainsboro;
+	padding:5px;
+	margin-bottom:5px;
+}
+
+.row-participant-eq {
+	box-sizing:border-box;
+	margin:2px;
+	border-radius:5px;
+	border:1px solid gainsboro;
+	padding:2px;
+}

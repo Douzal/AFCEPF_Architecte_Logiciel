@@ -1,0 +1,219 @@
+* {
+    margin: 0;
+    padding: 0;
+    border-bottom: none;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', 'Roboto', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 13px;
+    color: dimgrey;
+    background-color: whitesmoke;
+    overflow: hidden;
+}
+
+a, a:hover, a:active {
+    text-decoration: none;
+    background:none;
+}
+
+li:hover {
+	background:none;
+}
+
+#sidenav {
+    height: 100%;
+    width: 0;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    z-index: 1;
+    background-color: white;
+    color: black;
+    overflow-x: hidden;
+    padding-top: 20px;
+    transition : 0.5s;
+}
+
+.sidenav-link {
+    padding: 10px 12px;
+    font-size: 20px;
+    color: white;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav-link:hover {
+    color: whitesmoke;
+}
+
+#main {
+    transition: margin-left .5s;
+    width: 100%;
+    height:100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.primaire {
+	background-color: #3299FF;
+}
+
+.nav {
+    background-color: #3299FF;
+    overflow: hidden;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+    
+}
+
+.nav-logo {
+    font-size: 40px;
+    color: white;
+    font-family: 'Roboto Slab', 'Open Sans', serif;
+    float: left;
+}
+
+#icone-burger {
+    display:none;
+    color: white;
+    font-size: 30px;
+    cursor: pointer;
+    transition : 0.5s;
+    position:absolute;
+    left: 0;
+    top: 0;
+}
+
+#icone-burger:hover {
+    color: whitesmoke;
+}
+
+.recherche-bloc {
+    border-radius: 10px;
+    padding: 10px;
+    box-shadow: inset 0 .25rem .125rem 0 rgba(0,0,0,.5);
+    background-color: white;
+    color: black;
+    width: 100%;
+ 	margin-top: 5px;
+}
+
+.fa-search {
+    color: dimgrey;
+}
+
+.recherche {
+    border: none;
+    background: none;
+    width: 100%;
+}
+
+.nav-tabs {
+    border-bottom: none;
+    display: flex;
+	flex-direction: row;
+	justify-content: space-between; 
+	align-items: center;
+}
+
+.nav-link {
+    color: #000059;
+    background:none;
+    border: none;
+    text-align: center;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.nav-link:hover {
+    color: #000025;
+	background:none;
+	background-color: none;
+}
+
+.nav > li > a:hover, .nav > li > a:focus {
+	background:none;
+}
+
+.nav-compte {
+	float: right;
+}
+
+.avatar-compte {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    /* background-image: url("#{resource['images/deadpool.jpg']}");
+    background-size: contain; */
+	cursor: pointer;
+}
+
+.avatar-compte:hover {
+	/* background-image: url("#{resource['images/deadpool.jpg']}");
+    background-size: contain; */
+	box-sizing: inherit;    
+    border: 2px solid #000025;
+}
+
+.prenom-compte {
+    font-weight: bold;
+	height: 100%;
+	color: white;
+	background:none;
+	border: none;
+}
+
+.prenom-compte a {
+	color:white;
+}
+
+.contenu-dropdown {
+	display: none;
+	position: relative;
+	background-color: white;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+	z-index: 1;
+}
+
+.dropdown-link {
+	color: black;
+}
+
+.montrer {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 300px;
+}
+
+.conteneur {
+	width: 70%;
+	background-color: orange;
+	height: 100vh;
+}
+
+@media screen and (max-width: 750px) {
+
+    .recherche-bloc {
+        display: none;
+    }
+
+    .nav-tabs {
+        display:none;
+    }
+
+    #icone-burger {
+        display: block;
+    }
+}

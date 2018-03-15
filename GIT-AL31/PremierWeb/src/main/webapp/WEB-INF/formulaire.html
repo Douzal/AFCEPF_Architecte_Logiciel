@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Formulaire - Servlet</title>
+</head>
+<body>
+	<form action="formulaire.aspx" method="post">
+		<span>civilité : </span>
+		<span>M.</span>
+		<input type="radio" name="form-civilite" value="M."/>
+		<span> Mme. </span>
+		<input type="radio" name="form-civilite" value="Mme."/>
+		<br />
+		<span>nom : </span>
+		<input type="text" name="form-nom" /><br />
+		<span>prénom : </span>
+		<input type="text" name="form-prenom" /><br />
+		<span>naissance : </span>
+		<input type="text" name="form-naissance" /><br />
+		<span>activité : </span>
+		<select name="form-activite">
+			<option value="activité1">Activité 1</option>
+			<option value="activité2">Activité 2</option>
+			<option value="activité3">Activité 3</option>
+			<option value="activité4">Activité 4</option>
+			<option value="activité5">Activité 5</option>
+		</select><br />
+		<span>adresse : </span>
+		<textarea rows="5" cols="15" name="form-adresse" ></textarea><br />
+		<span>Choix : </span>
+		<br />
+		<input type="checkbox" name="form-choix" value="choix1" />
+		<span>Choix 1</span>
+		<br />
+		<input type="checkbox" name="form-choix" value="choix2" />
+		<span>Choix 2</span>
+		<br />
+		<input type="checkbox" name="form-choix" value="choix3" />
+		<span>Choix 3</span>
+		<br />
+		<input type="checkbox" name="form-choix" value="choix4" />
+		<span>Choix 4</span>
+		<br />
+		<input type="submit" value="Valider" />
+	</form>
+</body>
+</html>

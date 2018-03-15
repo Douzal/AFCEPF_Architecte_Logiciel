@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Formulaire</title>
+</head>
+<body>
+
+<form action="" method="get">
+	<label>Civilite : </label><input id="civ" name="civ" type="text"></input>
+	<label>Nom : </label>
+	<label>Prenom : </label>
+	<label>Date naissance : </label>
+	<label>Activité : </label>
+	<label>Adresse : </label>
+	<label>Que voulez-vous ? : </label>
+</form>
+
+
+</body>
+</html>

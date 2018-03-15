@@ -1,0 +1,8 @@
+package fr.afcepf.al31.controller;
+
+
+import javax.servlet.http.HttpServlet;
+
+public class PremierServlet extends HttpServlet {
+    private Logger log = Logger.getLogger(getClass());
+}
